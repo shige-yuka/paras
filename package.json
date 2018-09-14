@@ -1,0 +1,25 @@
+{
+  "name": "paras",
+  "version": "1.0.0",
+  "description": "paras",
+  "main": "index.js",
+  "dependencies": {
+    "nuxt": "^1.4.2",
+    "nuxt-edge": "^2.0.0-25615151.226b90d"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nuxt"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shige-yuka/paras.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shige-yuka/paras/issues"
+  },
+  "homepage": "https://github.com/shige-yuka/paras#readme"
+}
