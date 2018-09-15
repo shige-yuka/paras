@@ -4,8 +4,9 @@
  
 <script>
 export default {
-  data: () => {
-    return { name: 'world' }
+    layout: 'default',
+    
+    components: {
+    }
   }
-}
 </script> 

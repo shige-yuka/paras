@@ -1,0 +1,144 @@
+
+/*全体　共通
+最初から設定してあるので特に変更
+しなくても大丈夫です♪
+-----------------*/
+body{
+	font-family: Roboto, "Yu Gothic Medium", "游ゴシック Medium", YuGothic, "游ゴシック体", "ヒラギノ角ゴ Pro W3", "メイリオ", sans-serif;
+	line-height: 1.75;
+	font-size: 16px;
+	color: #222;
+}
+
+
+/*　パディングをサイズ内側にする処理　*/
+* {
+	padding:0;
+	margin:0;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+/*ーーーーーーーーーーー*/
+/*この下から記述*/
+/*ーーーーーーーーーーー*/
+
+.headline {
+	padding: 32px;
+	text-align: center;
+	text-transform: uppercase;
+}
+.global-header {
+	width: 100%;
+	max-width: 1440px;
+	margin: auto;
+	padding: 0 32px;
+}
+
+@media (min-width: 1024px) {
+	.global-header {
+		
+	}
+}
+@media (min-width: 1440px) {
+	.global-header {
+		
+	}
+}
+
+
+/*global-header
+---------------------*/
+.global-header {
+	width: 100%;
+	max-width: 1440px;
+	margin: auto;
+	padding: 0 32px;
+}
+@media (min-width: 600px) {
+	.global-header {
+		
+	}
+}
+@media (min-width: 1024px) {
+	.global-header {
+		
+	}
+}
+@media (min-width: 1440px) {
+	.global-header {
+		
+	}
+}
+.logo {
+	display: block;
+	width: calc(381px / 2);
+	height: calc(80px / 2);
+	background: url('../img/header_logo.png') no-repeat left center;
+	background-size: cover;
+	overflow: hidden;
+  text-indent: 100%;
+	white-space: nowrap;
+	transition: opacity .2s;
+	opacity: 1;
+}
+.logo:hover {
+	opacity: 0.5;
+}
+.global-header {
+	display: flex;
+	align-items: center;
+}
+.global-nav {
+	text-transform: uppercase;
+	align-content: flex-end;
+	margin-left: auto;
+	margin-right: 0;
+}
+.global-nav-list {
+	display: flex;
+	align-items: center;
+	font-size: 16px;
+}
+.global-nav-list__item {
+	padding: 16px;
+}
+.nav__link {
+	color: #222;
+	transition: opacity .2s;
+}
+.nav__link:hover {
+	opacity: 0.5;
+}
+.hero-image {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 400px;
+	background: url('../img/mainbg.png') no-repeat center center;
+	background-size: cover;
+	margin: auto;
+	color: #fff;
+	text-align: center;
+}
+/*
+---------------------*/
+
+
+
+/*
+---------------------*/
+
+
+
+/*
+---------------------*/
+
+
+
+/*
+---------------------*/
