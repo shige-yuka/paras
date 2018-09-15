@@ -29,4 +29,9 @@
 	--lh-l: 2;
 	--lh-m: 1.75;
 	--lh-s: 1.4;
+
+	/* color */
+	--primary: #FFA000;
+	--base-white: #fff;
+	--glay-light: #F7F8FA;
 }
