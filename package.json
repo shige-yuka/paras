@@ -4,8 +4,12 @@
   "description": "paras",
   "main": "index.js",
   "dependencies": {
+    "fs": "0.0.1-security",
+    "mysql": "^2.16.0",
+    "net": "^1.0.2",
     "nuxt": "^1.4.2",
-    "nuxt-edge": "^2.0.0-25615151.226b90d"
+    "nuxt-edge": "^2.0.0-25615151.226b90d",
+    "tls": "0.0.1"
   },
   "devDependencies": {},
   "scripts": {
