@@ -4,13 +4,13 @@ module.exports = {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '一生のうちに一度はやってみたいことをTodoリストにメモ。やりたい事を実現するための情報を、まとめて見ることができます。Todoリストは公開可能。誰かのやってみたい事を自分のスキルと資金で応援することもできます。' },
+      { hid: 'description', name: 'description', content: '一生のうちに一度はやってみたいことをTodoリストにメモ。友達や世界中の誰かが、あなたのやりたい事を実現するためのヒントを世界中の誰かが提供してくれます。Todoリストは公開可能。誰かのやってみたい事を自分のスキルと資金で応援することもできます。' },
       { name: 'robots', content: 'noindex,nofollow,noarchive' },
       { property: 'og:title', content: 'やってみたい事を自分のペースで。叶える、応援する、paras。' },
       { property: 'og:type', content: 'website' },
       { property: 'og:url', content: '#' },
       { property: 'og:site_name', content: 'やってみたい事を自分のペースで。叶える、応援する、paras。' },
-      { property: 'og:description', content: '一生のうちに一度はやってみたいことをTodoリストにメモ。やりたい事を実現するための情報を、まとめて見ることができます。Todoリストは公開可能。誰かのやってみたい事を自分のスキルと資金で応援することもできます。' },
+      { property: 'og:description', content: '一生のうちに一度はやってみたいことをTodoリストにメモ。友達や世界中の誰かが、あなたのやりたい事を実現するためのヒントを世界中の誰かが提供してくれます。Todoリストは公開可能。誰かのやってみたい事を自分のスキルと資金で応援することもできます。' },
       { property: 'format-detection', content: 'telephone=no' },
       { property: 'format-detection', content: 'telephone=no' },
     ],
@@ -20,10 +20,17 @@ module.exports = {
   ],
   css: [
     // プロジェクト内の CSS ファイル
-    '@/assets/css/reset.css',
-    '@/assets/css/sanitize.css',
+    '~/assets/css/reset.css',
+    '~/assets/css/sanitize.css',
   ],
   loading: {
     color: '#3B8070'
+  },
+  build: {
+    extend(config, { isDev, isClient }) {
+      config.node = {
+        fs: 'empty'
+      }
+    }
   }
 }

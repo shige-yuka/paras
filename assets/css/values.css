@@ -31,7 +31,21 @@
 	--lh-s: 1.4;
 
 	/* color */
+	--primary-gradient: linear-gradient(48deg, #FFB600 0%, #FFA000 92%);
+	--primary-light: #FFECCC;
+	--primary-lighter: #FFCF80;
 	--primary: #FFA000;
+	--primary-darker: #FF8200;
+	--primary-dark: #FF6400;
 	--base-white: #fff;
-	--glay-light: #F7F8FA;
+	--base-white-opacity: rgba(255, 255, 255, .2);
+	--gray-light: #F2F2F2;
+	--gray-lighter: #A6B8C5;
+	--base-gray: #6E8290;
+	--base-font-color: #52636E;
+
+	/* animation speed */
+	--speed-fast: .2s;
+	--speed-default: .4s;
+	--speed-slow: .6s;
 }

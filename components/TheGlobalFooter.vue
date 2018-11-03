@@ -1,8 +1,8 @@
 <template>
-  <footer>
-    <p :class="$style.footer">
-      copyrights 2016-2018 Cheeese Academy Tokyo All RIghts Reserved.<br>
-    </p>
+  <footer :class="$style.footer">
+    <small :class="$style.copyrights">
+      copyrights 2019 Paras All RIghts Reserved.
+    </small>
   </footer>
 </template>
 
@@ -11,8 +11,15 @@
 @import '../assets/css/values.css';
 
 .footer {
-  background-image: linear-gradient(48deg, #FFB600 0%, #FFA000 92%);
+  margin-bottom: var(--xxwide);
+  padding: var(--default);
+  background: var(--base-gray);
   color: var(--base-white);
   text-align: center;
+}
+@media screen and (min-width: 600px) {
+  .footer {
+    margin-bottom: 0;
+  }
 }
 </style>
