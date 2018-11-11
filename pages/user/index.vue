@@ -4,7 +4,7 @@
       <avatar-name />
     </section>
     <section :class="$style.recommend">
-      <recommend-list />
+      <recommend-list-group />
     </section>
     <v-fab />
   </article>
@@ -15,7 +15,7 @@ import VButton from '~/components/ui/VButton.vue'
 import VFab from '~/components/ui/VFloatingActionButton.vue'
 import AvatarName from '~/components/lv3/AvatarName.vue'
 import UserStatus from '~/components/lv3/UserStatus.vue'
-import RecommendList from '~/components/lv3/RecommendList.vue'
+import RecommendListGroup from '~/components/lv3/RecommendListGroup.vue'
 
 export default {
   layout: 'default',
@@ -23,7 +23,7 @@ export default {
   components: {
     AvatarName,
     UserStatus,
-    RecommendList,
+    RecommendListGroup,
     VButton,
     VFab
   }

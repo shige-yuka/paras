@@ -4,12 +4,15 @@
   "description": "paras",
   "main": "index.js",
   "dependencies": {
+    "@nuxtjs/vuetify": "^0.4.3",
     "fs": "0.0.1-security",
+    "material-design-icons-iconfont": "^4.0.2",
     "mysql": "^2.16.0",
     "net": "^1.0.2",
     "nuxt": "^1.4.2",
     "nuxt-edge": "^2.0.0-25615151.226b90d",
-    "tls": "0.0.1"
+    "tls": "0.0.1",
+    "vuetify": "^1.3.5"
   },
   "devDependencies": {},
   "scripts": {

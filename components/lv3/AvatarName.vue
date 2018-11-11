@@ -40,14 +40,14 @@ export default {
 }
 .photo {
   position: absolute;
-  top: 15px;
-  left: 15px;
+  top: 21px;
+  left: 21px;
   width: 6rem;
   height: 6rem;
   object-fit: cover;
   border-radius: 50%;
 }
-.name {
+.name, .wanTo {
   width: 100%;
   padding: var(--xnarrow) 0;
   font-size: 1rem;
