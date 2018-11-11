@@ -16,12 +16,17 @@ module.exports = {
     ],
   },
   link: [ //linkタグ関連
-    { rel: 'icon', href: '/favicon.ico' }
+    { rel: 'icon', href: '/favicon.ico' },
+    { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons' }
   ],
   css: [
     // プロジェクト内の CSS ファイル
     '~/assets/css/reset.css',
     '~/assets/css/sanitize.css',
+    '~/assets/css/values.css',
+  ],
+  script: [
+    { src: 'https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js' }
   ],
   loading: {
     color: '#3B8070'
@@ -31,6 +36,18 @@ module.exports = {
       config.node = {
         fs: 'empty'
       }
+    }
+  },
+  modules: [
+    '@nuxtjs/vuetify'
+  ],
+  vuetify: {
+    // Vuetify の設定はここに書く
+    theme: {
+      primary: '#FFA000',
+      secondary: '#3f51b5',
+      accent: '#29b6f6',
+      error: '#f50057'
     }
   }
 }

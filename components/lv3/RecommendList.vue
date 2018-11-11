@@ -1,34 +1,23 @@
 <template>
   <ul :class="[$style.grid, $style.cal3]">
     <li :class="[$style.item]">
-      <h2 :class="$style.title">ウユニ塩湖に行きたい</h2>
-      <div :class="$style.card">
-        <img src="~/assets/img/img-sample.png" :class="$style.img">
-        <p :class="$style.overText">
-          <span :class="$style.text">ウユニ塩湖に行くボリビア8日間の旅など</span>
-          <span :class="$style.text">など20件 ¥400,000〜</span>
-        </p>
-      </div>
-    </li>
-    <li :class="[$style.item]">
-      <h2 :class="$style.title">おいしいパン屋を制覇したい</h2>
-      <div :class="$style.card">
-        <img src="~/assets/img/img-sample2.png" :class="$style.img">
-        <p :class="$style.overText">
-          <span :class="$style.text">福岡パン部</span>
-          <span :class="$style.text">など8件 ¥300〜</span>
-        </p>
-      </div>
-    </li>
-    <li :class="[$style.item]">
-      <h2 :class="$style.title">ブルーベリー育ててみたい</h2>
-      <div :class="$style.card">
-        <img src="~/assets/img/img-sample3.png" :class="$style.img">
-        <p :class="$style.overText">
-          <span :class="$style.text">ベリーの育て方レッスン</span>
-          <span :class="$style.text">など4件 ¥5000〜</span>
-        </p>
-      </div>
+      <v-card>
+        <v-img
+          src="~/assets/img/img-sample.png"
+          aspect-ratio="2.75"
+        ></v-img>
+        <v-card-title primary-title>
+          <div>
+            <h3 class="headline mb-0">Kangaroo Valley Safari</h3>
+            <div>Located two hours south of Sydney in the <br>Southern Highlands of New South Wales, ...</div>
+          </div>
+        </v-card-title>
+
+        <v-card-actions>
+          <v-btn flat color="orange">Share</v-btn>
+          <v-btn flat color="orange">Explore</v-btn>
+        </v-card-actions>
+      </v-card>
     </li>
   </ul>
 </template>
@@ -43,18 +32,16 @@
 .item {
   padding-bottom: var(--xwide);
 }
-@media screen and (min-width: 600px) {
-  .grid.cal3 > .item {
-    width: calc(100% / 3);
-    padding: var(--default);
-  }
+.grid.cal3 > .item {
+  width: calc(100% / 3);
+  padding: var(--narrow);
 }
 .title {
   width: 100%;
   margin-bottom: var(--narrow);
   padding: 0 var(--default);
   overflow: hidden;
-  font-size: 1rem;
+  font-size: 1.2rem;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
@@ -69,7 +56,7 @@
 }
 .img {
   width: 100%;
-  height: 250px;
+  height: 90px;
   object-fit: cover;
 }
 @media screen and (min-width: 600px) {
@@ -98,7 +85,7 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   color: #4F4F4F;
-  font-size: .85rem;
+  font-size: 1rem;
 }
 
 </style>

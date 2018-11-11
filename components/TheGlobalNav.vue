@@ -1,26 +1,26 @@
 <template>
   <div :class="$style.globalNav">
     <ul :class="$style.navList">
-      <li :class="[$style.iconNav, {'router-link-active': $route.path === '/user'}]">
+      <li :class="[$style.iconNav, {'router-link-active': $route.path === '/user' || '/user/want-to-1'}]">
         <a href="/user" :class="$style.link">
           <v-icon-home :class="$style.icon" />
           <!-- <span :class="$style.text">Home</span> -->
         </a>
       </li>
       <li :class="[$style.iconNav, {'router-link-active': $route.path === '/user/calender'}]">
-        <a href="/calender" :class="$style.link">
+        <a href="/user/calender" :class="$style.link">
           <v-icon-calender :class="$style.icon" />
           <!-- <span :class="[$style.text, $style.jp]">ToDo</span> -->
         </a>
       </li>
       <li :class="[$style.iconNav, {'router-link-active': $route.path === '/user/message'}]">
-        <a href="/message" :class="$style.link">
+        <a href="/user/message" :class="$style.link">
           <v-icon-message :class="$style.icon" />
           <!-- <span :class="[$style.text, $style.jp]">メッセージ</span> -->
         </a>
       </li>
       <li :class="[$style.iconNav, {'router-link-active': $route.path === '/user/setting'}]">
-        <a href="/setting" :class="$style.link">
+        <a href="/user/setting" :class="$style.link">
           <v-icon-config :class="$style.icon" />
           <!-- <span :class="[$style.text, $style.jp]">設定</span> -->
         </a>
@@ -90,6 +90,7 @@ export default {
   align-items: center;
   justify-content: center;
   height: 100%;
+  padding: 0;
 }
 @media screen and (min-width: 600px) {
   .navList {
@@ -136,11 +137,11 @@ export default {
 .link:active,
 .link:hover,
 .link:visited {
-  color: var(--base-gray);
+  color: var(--gray-lighter);
 }
 .icon {
-  width: 1.6rem;
-  height: 1.6rem;
+  width: 1.8rem;
+  height: 1.8rem;
 }
 </style>
 
