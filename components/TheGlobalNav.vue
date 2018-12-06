@@ -1,7 +1,7 @@
 <template>
   <div :class="$style.globalNav">
     <ul :class="$style.navList">
-      <li :class="[$style.iconNav, {'router-link-active': $route.path === '/user' || '/user/want-to-1'}]">
+      <li :class="[$style.iconNav, {'router-link-active': $route.path === '/user'}]">
         <a href="/user" :class="$style.link">
           <v-icon-home :class="$style.icon" />
           <!-- <span :class="$style.text">Home</span> -->
