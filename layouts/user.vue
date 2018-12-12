@@ -1,5 +1,6 @@
 <template>
   <section :class="$style.nav">
+    <global-nav />
     <article :class="$style.article">
       <header :class="$style.header">
         <global-header />
@@ -13,13 +14,15 @@
 </template>
 
 <script>
-  import GlobalHeader from '~/components/TheServiceGlobalHeader.vue'
+  import GlobalHeader from '~/components/TheGlobalHeader.vue'
   import GlobalFooter from '~/components/TheGlobalFooter.vue'
+  import GlobalNav from '~/components/TheGlobalNav.vue'
 
   export default {
     components: {
       GlobalHeader,
       GlobalFooter,
+      GlobalNav
     }
   }
 </script>

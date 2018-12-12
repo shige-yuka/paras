@@ -17,7 +17,8 @@ module.exports = {
   },
   link: [ //linkタグ関連
     { rel: 'icon', href: '/favicon.ico' },
-    { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons' }
+    { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons' },
+    { rel: 'stylesheet', href: 'http://fonts.googleapis.com/earlyaccess/notosansjp.css' }
   ],
   css: [
     // プロジェクト内の CSS ファイル
@@ -26,7 +27,8 @@ module.exports = {
     '~/assets/css/values.css',
   ],
   script: [
-    { src: 'https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js' }
+    { src: 'https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js' },
+    { src: 'https://www.gstatic.com/firebasejs/5.7.0/firebase.js' }
   ],
   loading: {
     color: '#3B8070'

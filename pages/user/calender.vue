@@ -62,7 +62,7 @@ import VFab from '~/components/ui/VFloatingActionButton.vue'
 import Headline from '~/components/lv1/Headline.vue'
 
 export default {
-  layout: 'default',
+  layout: 'user',
 
   components: {
     VButton,

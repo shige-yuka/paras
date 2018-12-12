@@ -2,19 +2,17 @@
   <div :class="$style.globalHeader">
     <h1 :class="$style.logo"><v-logo /></h1>
     <div :class="$style.buttons">
-      <v-button type="outlineFlat">login</v-button>
+      <v-btn outline small color="white" :class="$style.button" class="mr-0" to="/">Logout</v-btn>
     </div>
   </div>
 </template>
 
 <script>
 import VLogo from '~/components/logo/logo.vue'
-import VButton from '~/components/ui/VButton.vue'
 
 export default {
   components: {
     VLogo,
-    VButton
   }
 }
 </script>
@@ -43,5 +41,8 @@ export default {
 .buttons {
   margin-right: 0;
   margin-left: auto;
+}
+.button {
+  text-transform: none;
 }
 </style>

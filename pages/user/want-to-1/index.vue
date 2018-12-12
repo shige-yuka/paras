@@ -11,7 +11,7 @@ import VFab from '~/components/ui/VFloatingActionButton.vue'
 import RecommendList from '~/components/lv3/RecommendList.vue'
 
 export default {
-  layout: 'default',
+  layout: 'user',
 
   components: {
     VButton,
