@@ -7,6 +7,9 @@
       <recommend-list-group />
     </section>
     <v-fab />
+    <div :class="$style.walkThrough">
+      <walk-through />
+    </div>
   </article>
 </template>
  
@@ -16,16 +19,18 @@ import VFab from '~/components/ui/VFloatingActionButton.vue'
 import AvatarName from '~/components/lv3/AvatarName.vue'
 import UserStatus from '~/components/lv3/UserStatus.vue'
 import RecommendListGroup from '~/components/lv3/RecommendListGroup.vue'
+import WalkThrough from '~/components/lv3/dialog/WalkThrough.vue'
 
 export default {
-  layout: 'default',
+  layout: 'user',
 
   components: {
     AvatarName,
     UserStatus,
     RecommendListGroup,
     VButton,
-    VFab
+    VFab,
+    WalkThrough
   }
 }
 </script>
@@ -46,5 +51,9 @@ export default {
   .recommend {
     padding: var(--narrow) var(--wide);
   }
+}
+.walkThrough {
+  position: relative;
+  z-index: 9999;
 }
 </style>

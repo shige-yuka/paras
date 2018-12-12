@@ -21,8 +21,8 @@
 	--font-default: 1;
 	--font-small: .8;
 	--font-xsmall: .5;
-	--font-size-xl: calc(var(--font-default)rem + (var(--font-xlarge) - var(--font-default)) * var(--coefficient));
-	--font-size-l: calc(var(--font-middle)rem + (var(--font-large) - var(--font-middle)) * var(--coefficient));
+	--font-size-xl: calc(var(--font-middle)rem + (var(--font-xlarge) - var(--font-middle)) * var(--coefficient));
+	--font-size-l: calc(var(--font-default)rem + (var(--font-large) - var(--font-default)) * var(--coefficient));
 	--font-size-m: calc(var(--font-default)rem + (1.2 - var(--font-default)) * var(--coefficient));
 
 	/* line-height */
@@ -31,7 +31,7 @@
 	--lh-s: 1.4;
 
 	/* color */
-	--primary-gradient: linear-gradient(48deg, #FFB600 0%, #FFA000 92%);
+	--primary-gradient: linear-gradient(225deg, #FFB600 0%, #FFA000 92%);
 	--primary-light: #FFECCC;
 	--primary-lighter: #FFCF80;
 	--primary: #FFA000;

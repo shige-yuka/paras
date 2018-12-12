@@ -1,6 +1,6 @@
 <template>
   <article>
-    <hero-image></hero-image>
+    サインアップー
   </article>
 </template>
  
@@ -11,7 +11,6 @@ export default {
   layout: 'default',
 
   components: {
-    HeroImage
   }
 }
 </script>
