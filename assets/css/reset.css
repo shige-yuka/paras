@@ -99,3 +99,17 @@ hr {
 input, select {
     vertical-align:middle;
 }
+
+/* vuetifyのスタイル変更 */
+.v-carousel__controls {
+    background: none !important;
+}
+.v-carousel__prev .theme--light.v-icon, .v-carousel__next .theme--light.v-icon {
+    color: #FFA000;
+}
+.v-carousel__controls .v-btn--active:before, .v-btn:hover:before, .v-btn:focus:before {
+    background: #FF8F00;
+}
+.v-carousel__controls .v-btn .v-btn__content .v-icon {
+    color: #FFA000;
+}
