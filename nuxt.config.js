@@ -1,3 +1,5 @@
+const webpack = require('webpack')
+
 module.exports = {
   head: {
     titleTemplate: 'やってみたい事を自分のペースで。叶える、応援する、paras。',
@@ -37,7 +39,17 @@ module.exports = {
     extend(config, { isDev, isClient }) {
       config.node = {
         fs: 'empty'
-      }
+      },
+      config.plugins.push(
+        new webpack.EnvironmentPlugin([
+          'AIzaSyC2dk8q0G4GjdYPYQdqlg5FXK3ETuT2URU',
+          'paras-3258b.firebaseapp.com',
+          'https://paras-3258b.firebaseio.com',
+          'paras-3258b',
+          'paras-3258b.appspot.com',
+          '1023663019269'
+        ])
+      )
     }
   },
   modules: [

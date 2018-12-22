@@ -3,52 +3,25 @@
     <div :class="$style.globalHeader">
       <h1 :class="$style.logo"><v-logo /></h1>
       <v-btn flat small color="orange" to="/login">ログイン</v-btn>
-      <v-btn @click="dialog = true" slot="activator" small dark color="amber darken-2" class="mr-0">アカウント作成</v-btn>
+      <v-btn @click="SignUpdialog = true" slot="activator" small dark color="amber darken-2" class="mr-0">アカウント作成</v-btn>
     </div>
-    <v-dialog v-model="dialog" max-width="400px">
-      <v-card :class="$style.dialog">
-        <v-card-title class="text-xs-center pb-0">
-          <h2 :class="$style.headline">アカウント作成</h2>
-        </v-card-title>
-        <v-card-text>
-          <v-container grid-list-md>
-            <v-layout wrap>
-              <v-flex xs12>
-                <v-btn color="indigo" block dark large :class="$style.snslogin" to="/user">Facebookアカウントで作成</v-btn>
-                <v-btn color="light-blue" block dark large :class="$style.snslogin" to="/user">Twitterアカウントで作成</v-btn>
-                <v-btn color="blue" block dark large :class="$style.snslogin" to="/user">Googleアカウントで作成</v-btn>
-              </v-flex>
-              <v-divider dark :class="$style.border"></v-divider>
-              <v-flex xs12>
-                <v-text-field label="Email" required dark></v-text-field>
-              </v-flex>
-              <v-flex xs12>
-                <v-text-field label="Password" type="password" require dark></v-text-field>
-              </v-flex>
-              <v-flex xs12>
-                <v-btn color="white" outline block>アカウント作成</v-btn>
-              </v-flex>
-            </v-layout>
-          </v-container>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn color="white" flat small @click="dialog = false">閉じる</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
+    <sign-up-dialog :SignUpdialog="SignUpdialog" />
   </section>
 </template>
 
 <script>
 import VLogo from '~/components/logo/logo.vue'
+import SignUpDialog from '~/components/lv3/dialog/SignUp.vue'
 
 export default {
-  data: () => ({
-    dialog: false
-  }),
+  data: () => {
+    return {
+      SignUpdialog: false
+    }
+  },
   components: {
-    VLogo
+    VLogo,
+    SignUpDialog
   }
 }
 </script>
