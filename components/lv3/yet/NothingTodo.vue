@@ -1,27 +1,13 @@
 <template>
   <section>
-    <div :class="$style.heroImage">
-      <h1 :class="$style.copy">やりたい事を<br>気楽に、気ながに始める。</h1>
-      <p :class="$style.read">いつかやりたい事を、誰かと叶える</p>
-      <div class="text-xs-center">
-        <v-btn outline large color="orange" @click="SignUpdialog = true">無料ではじめる</v-btn>
-      </div>
-    </div>
-    <sign-up-dialog :SignUpdialog="SignUpdialog" />
+    
   </section>
 </template>
 
 <script>
-import SignUpDialog from '~/components/lv3/dialog/SignUp.vue'
 
 export default {
-  data: () => {
-    return {
-      SignUpdialog: false
-    }
-  },
   components: {
-    SignUpDialog
   }
 }
 </script>

@@ -5,6 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "@nuxtjs/vuetify": "^0.4.3",
+    "firebase": "^5.7.0",
     "fs": "0.0.1-security",
     "material-design-icons-iconfont": "^4.0.3",
     "mysql": "^2.16.0",
