@@ -3,7 +3,7 @@ import firebase from 'firebase'
 if (!firebase.apps.length) {
   firebase.initializeApp(
     {
-      apiKey: "***********",
+      apiKey: "111***********",
       authDomain: "***********",
       databaseURL: "***********",
       projectId: "***********",
