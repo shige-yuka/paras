@@ -91,11 +91,12 @@ export default {
   justify-content: center;
   height: 100%;
   padding: 0;
+  margin: 0;
 }
 @media screen and (min-width: 600px) {
   .navList {
     display: block;
-    margin-top: var(--narrow);
+    padding-top: var(--narrow);
   }
 }
 .iconNav {
@@ -113,7 +114,7 @@ export default {
   align-items: center;
   justify-content: center;
   width: 4rem;
-  padding: calc(var(--narrow) + 3px) var(--xnarrow);
+  padding: 0;
   color: var(--gray-lighter);
 }
 @media screen and (min-width: 600px) {
@@ -123,6 +124,7 @@ export default {
     align-items: center;
     justify-content: center;
     width: auto;
+    padding: calc(var(--narrow) + 3px) var(--xnarrow);
   }
 }
 .text {
