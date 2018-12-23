@@ -20,7 +20,7 @@
       </v-carousel>
       <v-card-actions>
         <div :class="$style.startButtonWrap">
-          <v-btn small dark color="amber darken-2" @click="dialog = false" to="/user/account">はじめる</v-btn>
+          <v-btn small dark color="amber darken-2" @click="dialog = false">はじめる</v-btn>
         </div>
       </v-card-actions>
     </v-card>
