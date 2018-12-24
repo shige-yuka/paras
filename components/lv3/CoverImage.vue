@@ -34,7 +34,7 @@ export default {
   align-items: flex-end;
   justify-content: flex-end;
   width: 100%;
-  min-height: 210px;
+  min-height: 30vh;
   margin-bottom: -40px;
   background: var(--secondary);
   object-fit: cover;
