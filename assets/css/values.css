@@ -37,13 +37,14 @@
 	--primary: #FFA000;
 	--primary-darker: #FF8200;
 	--primary-dark: #FF6400;
-	--secondary: #51C9D8;
+	--secondary: #26C6DA;
 	--base-white: #fff;
 	--base-white-opacity: rgba(255, 255, 255, .2);
-	--gray-light: #F2F2F2;
+	--gray-light: #F7F8FA;
 	--gray-lighter: #A6B8C5;
 	--base-gray: #6E8290;
 	--base-font-color: #52636E;
+	--font-color-disabled: #D5D3D3;
 
 	/* animation speed */
 	--speed-fast: .2s;

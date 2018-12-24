@@ -4,9 +4,11 @@
       <cover-image />
       <avatar-name />
     </section>
-    <section :class="$style.recommend">
+    <!-- TODO: プロジェクトがない時とある時で表示を変える -->
+    <!-- <section :class="$style.recommend">
       <recommend-list-group />
-    </section>
+    </section> -->
+    <unset-todo :class="$style.unset" />
     <v-fab />
     <div :class="$style.walkThrough">
       <walk-through />
@@ -17,6 +19,7 @@
 <script>
 import VButton from '~/components/ui/VButton.vue'
 import VFab from '~/components/ui/VFloatingActionButton.vue'
+import UnsetTodo from '~/components/lv2/UnsetTodo.vue'
 import AvatarName from '~/components/lv3/AvatarName.vue'
 import CoverImage from '~/components/lv3/CoverImage.vue'
 import UserStatus from '~/components/lv3/UserStatus.vue'
@@ -31,6 +34,7 @@ export default {
     CoverImage,
     UserStatus,
     RecommendListGroup,
+    UnsetTodo,
     VButton,
     VFab,
     WalkThrough
@@ -49,5 +53,10 @@ export default {
 .walkThrough {
   position: relative;
   z-index: 9999;
+}
+.unset {
+  position: fixed;
+  right: var(--default);
+  bottom: 7.5rem;
 }
 </style>
