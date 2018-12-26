@@ -3,9 +3,11 @@
     <div :class="$style.globalHeader">
       <h1 :class="$style.logo"><v-logo /></h1>
       <v-btn flat small color="orange" to="/login">ログイン</v-btn>
-      <v-btn @click="SignUpdialog = true" slot="activator" small dark color="amber darken-2" class="mr-0">アカウント作成</v-btn>
+      <v-btn @click="dialog=true" slot="activator" small dark color="amber darken-2" class="mr-0">アカウント作成</v-btn>
     </div>
-    <sign-up-dialog :SignUpdialog="SignUpdialog" />
+    <v-dialog v-model="dialog" width="400px">
+      <sign-up-dialog @close="dialog=false" />
+    </v-dialog>
   </section>
 </template>
 
@@ -14,9 +16,9 @@ import VLogo from '~/components/logo/logo.vue'
 import SignUpDialog from '~/components/lv3/dialog/SignUp.vue'
 
 export default {
-  data: () => {
+  data() {
     return {
-      SignUpdialog: false
+      dialog: false
     }
   },
   components: {

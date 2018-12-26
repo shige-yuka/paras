@@ -1,45 +1,40 @@
 <template>
-  <v-dialog v-model="SignUpdialog" max-width="400px">
-    <v-card :class="$style.dialog">
-      <v-card-title class="text-xs-center pb-0">
-        <h2 :class="$style.headline">アカウント作成</h2>
-      </v-card-title>
-      <v-card-text>
-        <v-container grid-list-md>
-          <v-layout wrap>
-            <v-flex xs12>
-              <v-btn color="indigo" block dark large :class="$style.snslogin" to="/user">Facebookアカウントで作成</v-btn>
-              <v-btn color="light-blue" block dark large :class="$style.snslogin" to="/user">Twitterアカウントで作成</v-btn>
-              <v-btn color="blue" block dark large :class="$style.snslogin" @click="googleLogin">Googleアカウントで作成</v-btn>
-            </v-flex>
-            <v-divider dark :class="$style.border"></v-divider>
-            <v-flex xs12>
-              <v-text-field label="Email" required dark></v-text-field>
-            </v-flex>
-            <v-flex xs12>
-              <v-text-field label="Password" type="password" require dark></v-text-field>
-            </v-flex>
-            <v-flex xs12>
-              <v-btn color="white" outline block>アカウント作成</v-btn>
-            </v-flex>
-          </v-layout>
-        </v-container>
-      </v-card-text>
-      <v-card-actions>
-        <v-spacer></v-spacer>
-        <v-btn color="white" flat small @click="SignUpdialog = false">閉じる</v-btn>
-      </v-card-actions>
-    </v-card>
-  </v-dialog>
+  <v-card :class="$style.dialog">
+    <v-card-title class="text-xs-center pb-0">
+      <h2 :class="$style.headline">アカウント作成</h2>
+    </v-card-title>
+    <v-card-text>
+      <v-container grid-list-md>
+        <v-layout wrap>
+          <v-flex xs12>
+            <v-btn color="indigo" block dark large :class="$style.snslogin" to="/user">Facebookアカウントで作成</v-btn>
+            <v-btn color="light-blue" block dark large :class="$style.snslogin" to="/user">Twitterアカウントで作成</v-btn>
+            <v-btn color="blue" block dark large :class="$style.snslogin" @click="googleLogin">Googleアカウントで作成</v-btn>
+          </v-flex>
+          <v-divider dark :class="$style.border"></v-divider>
+          <v-flex xs12>
+            <v-text-field label="Email" required dark></v-text-field>
+          </v-flex>
+          <v-flex xs12>
+            <v-text-field label="Password" type="password" require dark></v-text-field>
+          </v-flex>
+          <v-flex xs12>
+            <v-btn color="white" outline block>アカウント作成</v-btn>
+          </v-flex>
+        </v-layout>
+      </v-container>
+    </v-card-text>
+    <v-card-actions>
+      <v-spacer></v-spacer>
+      <v-btn color="white" flat small @click="$emit('close')">閉じる</v-btn>
+    </v-card-actions>
+  </v-card>
 </template>
 
 <script>
 import firebase from '@/plugins/firebase'
 
 export default {
-  props: {
-    SignUpdialog: false
-  },
   methods: {
     googleLogin: function() {
       firebase.auth().signInWithRedirect(new firebase.auth.GoogleAuthProvider());

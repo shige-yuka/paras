@@ -4,10 +4,12 @@
       <h1 :class="$style.copy">やりたい事を<br>気楽に、気ながに始める。</h1>
       <p :class="$style.read">いつかやりたい事を、誰かと叶える</p>
       <div class="text-xs-center">
-        <v-btn outline large color="orange" @click="SignUpdialog = true">無料ではじめる</v-btn>
+        <v-btn outline large color="orange" @click="dialog = true">無料ではじめる</v-btn>
       </div>
     </div>
-    <sign-up-dialog :SignUpdialog="SignUpdialog" />
+    <v-dialog v-model="dialog" width="400px">
+      <sign-up-dialog @close="dialog=false" />
+    </v-dialog>
   </section>
 </template>
 
@@ -15,9 +17,9 @@
 import SignUpDialog from '~/components/lv3/dialog/SignUp.vue'
 
 export default {
-  data: () => {
+  data() {
     return {
-      SignUpdialog: false
+      dialog: false
     }
   },
   components: {
