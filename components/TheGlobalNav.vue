@@ -69,7 +69,6 @@ export default {
 }
 @media screen and (min-width: 600px) {
   .globalNav {
-    position: sticky;
     top: 0;
     width: 4rem;
     min-width: 4rem;
@@ -96,7 +95,7 @@ export default {
 @media screen and (min-width: 600px) {
   .navList {
     display: block;
-    padding-top: var(--narrow);
+    padding-top: var(--wide);
   }
 }
 .iconNav {
