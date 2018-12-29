@@ -1,5 +1,5 @@
 <template>
-  <section :class="$style.nav">
+  <v-app :class="$style.nav">
     <article :class="$style.article">
       <header :class="$style.header">
         <global-header />
@@ -9,7 +9,7 @@
       </div>
       <global-footer />
     </article>
-  </section>
+  </v-app>
 </template>
 
 <script>
@@ -47,7 +47,7 @@
   display: block;
   width: 100%;
   height: 48px;
-  z-index: 9999;
+  z-index: 10;
 }
 .article {
   width: 100%;

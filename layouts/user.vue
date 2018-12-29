@@ -1,5 +1,5 @@
 <template>
-  <section :class="$style.nav">
+  <v-app :class="$style.nav">
     <global-nav />
     <article :class="$style.article">
       <header :class="$style.header">
@@ -10,7 +10,7 @@
       </div>
       <global-footer />
     </article>
-  </section>
+  </v-app>
 </template>
 
 <script>
@@ -38,6 +38,11 @@
 .contents {
   min-height: calc(100vh - 48px);
   color: var(--base-font-color);
+}
+@media screen and (min-width: 600px) {
+  .contents {
+    padding-left: 4rem;
+  }
 }
 .nav {
   display: flex;
