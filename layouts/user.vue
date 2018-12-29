@@ -1,5 +1,5 @@
 <template>
-  <v-app :class="$style.nav">
+  <v-app :class="$style.user">
     <global-nav />
     <article :class="$style.article">
       <header :class="$style.header">
@@ -44,7 +44,7 @@
     padding-left: 4rem;
   }
 }
-.nav {
+.user {
   display: flex;
   position: sticky;
   top: 0;
@@ -55,7 +55,7 @@
   display: block;
   width: 100%;
   height: 48px;
-  z-index: 9999;
+  z-index: 999;
 }
 .article {
   width: 100%;

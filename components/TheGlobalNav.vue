@@ -65,7 +65,7 @@ export default {
   color: var(--base-white);
   overflow-x: hidden;
   overflow-y: scroll;
-  z-index: 9999;
+  z-index: 999;
 }
 @media screen and (min-width: 600px) {
   .globalNav {
