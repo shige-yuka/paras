@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "sourceMap": true,
+    "target": "es5",
+    "strict": true,
+    "module": "esnext",
+    "allowSyntheticDefaultImports":true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "noImplicitThis": true,
+    "allowJs": true,
+    "baseUrl": ".",
+    "lib": [
+      "esnext",
+      "dom"
+    ],
+    "paths": {
+      "@/*": [
+        "src/*"
+      ]
+    }
+  }
+}
