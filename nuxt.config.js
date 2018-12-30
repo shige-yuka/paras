@@ -1,6 +1,10 @@
 const webpack = require('webpack')
+const extendConfig = require('./webpack.config.extend')
+const pkg = require('./package')
 
 module.exports = {
+  mode: 'universal',
+  srcDir: 'src/',
   head: {
     titleTemplate: 'やってみたい事を自分のペースで。叶える、応援する、paras。',
     meta: [
@@ -40,16 +44,7 @@ module.exports = {
       config.node = {
         fs: 'empty'
       },
-      config.plugins.push(
-        new webpack.EnvironmentPlugin([
-          'AIzaSyC2dk8q0G4GjdYPYQdqlg5FXK3ETuT2URU',
-          'paras-3258b.firebaseapp.com',
-          'https://paras-3258b.firebaseio.com',
-          'paras-3258b',
-          'paras-3258b.appspot.com',
-          '1023663019269'
-        ])
-      )
+      extendConfig(config)
     }
   },
   modules: [
@@ -63,5 +58,13 @@ module.exports = {
       accent: '#29b6f6',
       error: '#f50057'
     }
+  },
+  env: {
+    APIKEY: process.env.APIKEY,
+    AUTHDOMAIN: process.env.AUTHDOMAIN,
+    DATABASEURL: process.env.DATABASEURL,
+    PROJECTID: process.env.PROJECTID,
+    STORAGEBUCKET: process.env.STORAGEBUCKET,
+    MESSAGINGSENDERID: process.env.MESSAGINGSENDERID
   }
 }
