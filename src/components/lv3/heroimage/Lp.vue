@@ -29,13 +29,14 @@ export default Vue.extend({
   },
   components: {
     SignUpDialog
+  },
+  created() {
+    console.log(process.env)
   }
 })
 </script>
 
 <style module>
-@import '../../../assets/css/values.css';
-
 .heroImage {
   display: flex;
   align-items: center;

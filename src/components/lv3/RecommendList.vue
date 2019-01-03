@@ -23,8 +23,6 @@
 </template>
 
 <style module>
-@import '../../assets/css/values.css';
-
 .grid {
   display: flex;
   flex-wrap: wrap;

@@ -45,8 +45,6 @@ export default Vue.extend({
 </script>
 
 <style module>
-@import '../../assets/css/values.css';
-
 @media screen and (min-width: 600px) {
   .recommend {
     padding: var(--narrow) var(--wide);

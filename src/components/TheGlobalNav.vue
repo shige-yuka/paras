@@ -49,9 +49,6 @@ export default Vue.extend({
 </script>
 
 <style module>
-
-@import '../assets/css/values.css';
-
 .globalNav {
   position: fixed;
   bottom: 0;
@@ -149,8 +146,6 @@ export default Vue.extend({
 </style>
 
 <style scoped>
-@import '../assets/css/values.css';
-
 .router-link-active > a {
   color: var(--primary);
 }

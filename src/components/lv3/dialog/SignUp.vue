@@ -46,8 +46,6 @@ export default Vue.extend({
 </script>
 
 <style module>
-@import '../../../assets/css/values.css';
-
 .dialog {
   background: var(--primary-gradient);
 }

@@ -30,9 +30,6 @@ export default Vue.extend({
 </script>
 
 <style module>
-
-@import '../assets/css/values.css';
-
 .globalHeader {
   display: flex;
   width: 100%;

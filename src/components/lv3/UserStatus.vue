@@ -16,8 +16,6 @@
 </template>
 
 <style module>
-@import '../../assets/css/values.css';
-
 @media screen and (min-width: 600px) {
   .detail {
     padding-left: var(--default);

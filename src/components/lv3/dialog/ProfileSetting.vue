@@ -34,8 +34,6 @@
 </template>
 
 <style module>
-@import '../../../assets/css/values.css';
-
 .dialog {
   background: var(--primary-gradient);
 }

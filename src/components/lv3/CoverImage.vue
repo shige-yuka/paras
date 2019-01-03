@@ -26,8 +26,6 @@ export default Vue.extend({
 
 
 <style module>
-@import '../../assets/css/values.css';
-
 .target {
   display: flex;
   flex-wrap: wrap;

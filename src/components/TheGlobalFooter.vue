@@ -7,9 +7,6 @@
 </template>
 
 <style module>
-
-@import '../assets/css/values.css';
-
 .footer {
   margin-bottom: var(--xxwide);
   padding: var(--default);

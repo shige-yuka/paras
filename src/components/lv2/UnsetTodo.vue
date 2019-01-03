@@ -14,8 +14,6 @@ export default Vue.extend({
 </script>
 
 <style module>
-@import '../../assets/css/values.css';
-
 .text {
   color: var(--font-color-disabled);
   font-weight: bold;
