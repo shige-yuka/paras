@@ -203,7 +203,6 @@ export default Vue.extend({
 </script>
 
 <style module>
-@import '../../../assets/css/values.css';
 
 .title {
   font-size: .8rem;
