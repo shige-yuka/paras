@@ -1,6 +1,6 @@
 const webpack = require('webpack')
 const extendConfig = require('./webpack.config.extend')
-const pkg = require('./package')
+const customProperties = require('./src/assets/css/customProperties')
 
 module.exports = {
   mode: 'universal',
@@ -30,16 +30,18 @@ module.exports = {
     // プロジェクト内の CSS ファイル
     '~/assets/css/reset.css',
     '~/assets/css/sanitize.css',
-    '~/assets/css/values.css',
-  ],
-  script: [
-    { src: 'https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js' },
-    { src: 'https://www.gstatic.com/firebasejs/5.7.0/firebase.js' }
   ],
   loading: {
     color: '#3B8070'
   },
   build: {
+    postcss: [
+      require('postcss-custom-properties')({
+        preserve: false,
+        importFrom: [{ customProperties }],
+      }),
+      require('postcss-calc')(),
+    ],
     extend(config, { isDev, isClient }) {
       config.node = {
         fs: 'empty'
