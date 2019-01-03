@@ -1,16 +1,16 @@
 <template>
   <section :class="$style.nav">
-      <article :class="$style.article">
-        <header :class="$style.header">
-          <global-header />
-        </header>
-        <div :class="$style.contents">
-          <v-app>
-            <nuxt />
-          </v-app>
-        </div>
-        <global-footer />
-      </article>
+    <article :class="$style.article">
+      <header :class="$style.header">
+        <global-header />
+      </header>
+      <div :class="$style.contents">
+        <v-app>
+          <nuxt />
+        </v-app>
+      </div>
+      <global-footer />
+    </article>
   </section>
 </template>
 
@@ -48,7 +48,7 @@
   display: block;
   width: 100%;
   height: 48px;
-  z-index: 9999;
+  z-index: 10;
 }
 .article {
   width: 100%;
