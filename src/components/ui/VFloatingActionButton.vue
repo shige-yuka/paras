@@ -29,8 +29,6 @@
 
 <style module>
 
-@import '../../assets/css/values.css';
-
 .buttonWrap {
   position: fixed;
   right: 1rem;

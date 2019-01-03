@@ -28,8 +28,6 @@
 </script>
 
 <style module>
-@import '../assets/css/values.css';
-
 .article {
   min-height: 100vh;
   background: var(--gray-light);

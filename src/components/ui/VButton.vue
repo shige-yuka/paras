@@ -27,9 +27,6 @@
 </script>
 
 <style module>
-
-@import '../../assets/css/values.css';
-
 .button {
   border-radius: 4px;
   padding: var(--xnarrow) var(--narrow);

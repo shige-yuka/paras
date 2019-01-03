@@ -40,8 +40,6 @@ export default Vue.extend({
 </script>
 
 <style module>
-@import '../../../assets/css/values.css';
-
 .dialog {
   padding-bottom: var(--default);
 }

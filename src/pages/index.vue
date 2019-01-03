@@ -48,8 +48,3 @@ export default {
   }
 }
 </script>
-
-<style module>
-@import '../assets/css/values.css';
-
-</style>
