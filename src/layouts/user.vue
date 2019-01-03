@@ -1,12 +1,14 @@
 <template>
-  <section :class="$style.nav">
+  <section :class="$style.user">
     <global-nav />
     <article :class="$style.article">
       <header :class="$style.header">
         <global-header />
       </header>
       <div :class="$style.contents">
-        <nuxt />
+        <v-app>
+          <nuxt />
+        </v-app>
       </div>
       <global-footer />
     </article>
@@ -40,7 +42,12 @@
   min-height: calc(100vh - 48px);
   color: var(--base-font-color);
 }
-.nav {
+@media screen and (min-width: 600px) {
+  .contents {
+    padding-left: 4rem;
+  }
+}
+.user {
   display: flex;
   position: sticky;
   top: 0;
@@ -51,7 +58,7 @@
   display: block;
   width: 100%;
   height: 48px;
-  z-index: 9999;
+  z-index: 999;
 }
 .article {
   width: 100%;

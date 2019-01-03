@@ -66,11 +66,10 @@ export default Vue.extend({
   color: var(--base-white);
   overflow-x: hidden;
   overflow-y: scroll;
-  z-index: 9999;
+  z-index: 999;
 }
 @media screen and (min-width: 600px) {
   .globalNav {
-    position: sticky;
     top: 0;
     width: 4rem;
     min-width: 4rem;
@@ -97,7 +96,7 @@ export default Vue.extend({
 @media screen and (min-width: 600px) {
   .navList {
     display: block;
-    padding-top: var(--narrow);
+    padding-top: var(--wide);
   }
 }
 .iconNav {
