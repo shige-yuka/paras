@@ -1,49 +1,54 @@
 <template>
   <ul :class="[$style.grid, $style.cal3]">
-    <li :class="[$style.item]">
+    <li :class="[$style.item]" v-for="(pItems, index) in planItems" :key="index">
       <v-card>
-        <img src="~/assets/img/img-sample.png" :class="$style.img">
+        <img :src="pItems.src" :class="$style.img">
         <v-card-title primary-title>
-          <div>
-            <div :class="$style.title">ウユニ塩湖に行きたい</div>
-            <span class="grey--text">ウユニ塩湖に行くボリビア8日間の旅など<br>20件 ¥400,000〜</span>
+          <div :class="$style.overview">
+            <h3 :class="$style.title">{{ pItems.title }}</h3>
+            <v-checkbox
+              v-model="checkbox"
+              :label="pItems.plan"
+              :class="$style.todo"
+              color="cyan"
+            ></v-checkbox>
+            <p :class="$style.term">期限：{{ pItems.day }}</p>
+            <span :class="$style.category">{{ pItems.categoryLv1 }}</span>
+            <span :class="$style.category">{{ pItems.categoryLv2 }}</span>
+            <v-progress-linear
+              :class="$style.progress"
+              background-color="cyan lighten-3"
+              color="cyan lighten-1"
+              :value="pItems.ratio"
+            ></v-progress-linear>
+            <span :class="$style.attainment">{{ pItems.numerator }}/{{ pItems.denominator }}</span>
           </div>
         </v-card-title>
 
         <v-card-actions>
+          <v-btn flat small color="primary">削除</v-btn>
+          <v-btn flat small color="primary">完了</v-btn>
           <v-spacer></v-spacer>
           <v-btn icon @click="show = !show">
             <v-icon>{{ show ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</v-icon>
           </v-btn>
         </v-card-actions>
-
+        
         <v-slide-y-transition>
-          <div v-show="show">
-            I'm a thing. But, like most politicians, he promised more than he could deliver. You won't have time for sleeping, soldier, not with all the bed making you'll be doing. Then we'll go with that data file! Hey, you add a one and two zeros to that or we walk! You're going to do his laundry? I've got to find a way to escape.<br>
-            <v-btn flat color="primary" to="/user/want-to-1">More</v-btn>
-          </div>
+          <v-card-text v-show="show">
+            <ul>
+              <li v-for="(p, index) in plans" :key="index">
+                <v-checkbox
+                  v-model="checkbox"
+                  :label="`${p.day} ${p.plan}`"
+                  :class="$style.todo"
+                  color="cyan"
+                ></v-checkbox>
+              </li>
+            </ul>
+          </v-card-text>
         </v-slide-y-transition>
       </v-card>
-    </li>
-    <li :class="[$style.item]">
-      <h2 :class="$style.title">おいしいパン屋を制覇したい</h2>
-      <div :class="$style.card">
-        <img src="~/assets/img/img-sample2.png" :class="$style.img">
-        <p :class="$style.overText">
-          <span :class="$style.text">福岡パン部</span>
-          <span :class="$style.text">など8件 ¥300〜</span>
-        </p>
-      </div>
-    </li>
-    <li :class="[$style.item]">
-      <h2 :class="$style.title">ブルーベリー育ててみたい</h2>
-      <div :class="$style.card">
-        <img src="~/assets/img/img-sample3.png" :class="$style.img">
-        <p :class="$style.overText">
-          <span :class="$style.text">ベリーの育て方レッスン</span>
-          <span :class="$style.text">など4件 ¥5000〜</span>
-        </p>
-      </div>
     </li>
   </ul>
 </template>
@@ -52,7 +57,27 @@
   import Vue from 'vue'
   export default Vue.extend({
     data: () => ({
-      show: false
+      show: false,
+      planItems: [
+        {src: require('~/assets/img/img-sample2.png'), title: 'おいしい食パンを焼く', plan: '食パンのレシピを検索する', day: '2019/1/11', categoryLv1: '料理', categoryLv2: 'パン', ratio: 1, numerator: 0, denominator: 13},
+        {src: require('~/assets/img/img-sample4.png'), title: 'スカイダイビングをする', plan: 'スカイダイビングで検索', day: '2019/1/11', categoryLv1: 'レジャー・スポーツ', categoryLv2: '空', ratio: 1, numerator: 0, denominator: 12},
+        {src: require('~/assets/img/img-sample3.png'), title: 'プランターでブルーベリーを育てる', plan: 'ブルーベリー 育て方 で検索', day: '2019/1/11', categoryLv1: '園芸', categoryLv2: 'フルーツ', ratio: 1, numerator: 0, denominator: 22}
+      ],
+      plans: [
+        {day: '1/11', plan: '食パンのレシピを検索する'},
+        {day: '1/17', plan: '食パン作りの道具を揃える'},
+        {day: '1/17', plan: '食パン作りの材料を揃える'},
+        {day: '1/18', plan: 'プレーンな食パンを焼く'},
+        {day: '1/24', plan: 'くるみ食パンの材料を追加購入する'},
+        {day: '1/25', plan: 'くるみ食パンを焼く'},
+        {day: '1/31', plan: 'ドライフルーツ食パンの材料を追加購入する'},
+        {day: '2/1', plan: 'ドライフルーツ食パンを焼く'},
+        {day: '2/7', plan: 'チョコマーブル食パンの材料を追加購入する'},
+        {day: '2/8', plan: 'チョコマーブル食パンを焼く'},
+        {day: '2/14', plan: '自信がある食パンの材料を追加購入する'},
+        {day: '2/15', plan: '自信がある食パンを焼く'},
+        {day: '2/15', plan: '焼いた食パンを誰かにふるまい「おいしい」と言ってもらう'}
+      ]
     })
   })
 </script>
@@ -61,34 +86,18 @@
 .grid {
   display: flex;
   flex-wrap: wrap;
+  max-width: 960px;
+  margin: var(--default) auto;
 }
 .item {
   width: 100%;
   padding-bottom: var(--xwide);
 }
 @media screen and (min-width: 600px) {
-  .grid.cal3 > .item {
+  .item {
     width: calc(100% / 3);
     padding: var(--default);
   }
-}
-.title {
-  width: 100%;
-  margin-bottom: var(--narrow);
-  padding: 0;
-  overflow: hidden;
-  font-size: 1.2rem;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-@media screen and (min-width: 600px) {
-  .title {
-    padding: 0;
-  }
-}
-.card {
-  position: relative;
-  width: 100%;
 }
 .img {
   width: 100%;
@@ -99,6 +108,53 @@
   .img {
     height: 160px;
   }
+}
+.title {
+  width: 100%;
+  margin-bottom: var(--narrow);
+  padding: 0;
+  font-size: 1.2rem;
+}
+@media screen and (min-width: 600px) {
+  .title {
+    padding: 0;
+  }
+}
+.overview {
+  width: 100%;
+  color: var(--base-font-color);
+}
+.todo {
+  margin-top: var(--narrow);
+}
+.todo label {
+  font-size: .9rem;
+}
+.todo div {
+  margin-bottom: 0 !important;
+}
+.term {
+  margin-bottom: var(--narrow);
+  text-align: right;
+}
+.category {
+  display: inline-block;
+  height: 24px;
+  padding: 5px 10px;
+  border-radius: 12px;
+  background: var(--gray-lighten);
+  font-size: var(--font-small)rem;
+}
+.progress {
+  margin-bottom: var(--xnarrow);
+}
+.attainment {
+  display: block;
+  text-align: right;
+}
+.card {
+  position: relative;
+  width: 100%;
 }
 .overText {
   position: absolute;
