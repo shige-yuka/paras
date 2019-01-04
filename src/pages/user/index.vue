@@ -5,10 +5,10 @@
       <avatar-name />
     </section>
     <!-- TODO: プロジェクトがない時とある時で表示を変える -->
-    <!-- <section :class="$style.recommend">
+    <section :class="$style.recommend">
       <recommend-list-group />
-    </section> -->
-    <unset-todo :class="$style.unset" />
+    </section>
+    <!-- <unset-todo :class="$style.unset" /> -->
     <v-fab />
     <div :class="$style.walkThrough">
       <walk-through />
