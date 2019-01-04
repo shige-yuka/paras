@@ -103,6 +103,12 @@
 }
 @media screen and (min-width: 600px) {
   .item {
+    width: calc(100% / 2);
+    padding: var(--default);
+  }
+}
+@media screen and (min-width: 960px) {
+  .item {
     width: calc(100% / 3);
     padding: var(--default);
   }
