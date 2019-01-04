@@ -12,20 +12,32 @@
       </div>
     </article>
     <p :class="$style.name">Takeshige</p>
-    <p :class="$style.wanTo">やりたい事<want-to /></p>
+    <ul :class="$style.statuses">
+      <li :class="$style.item" v-for="(s, index) in statuses" :key="index">
+        <span :class="$style.label">{{ s.label }}</span>
+        <span :class="$style.count">{{ s.count }}</span>
+      </li>
+    </ul>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import WantTo from '~/components/lv1/WantTo.vue'
 import VIconPhoto from '~/components/icon/Photo.vue'
 
 export default Vue.extend({
 
   components: {
-    WantTo,
     VIconPhoto
+  },
+  data() {
+    return {
+      statuses: [
+        {label: '達成', count: 0},
+        {label: 'おせっかい', count: 0},
+        {label: 'スキル', count: 0},
+      ]
+    }
   }
 })
 </script>
@@ -47,11 +59,28 @@ export default Vue.extend({
   object-fit: cover;
   border-radius: 50%;
 }
-.name, .wanTo {
+.name {
   width: 100%;
   padding: var(--xnarrow) 0;
   font-size: 1rem;
   text-align: center;
+}
+.statuses {
+  display: flex;
+}
+.item {
+  width: 80px;
+  padding: var(--xnarrow);
+  line-height: 1.2;
+  text-align: center;
+}
+.label {
+  display: block;
+  font-size: var(--font-small)rem;
+}
+.count {
+  display: block;
+  font-size: var(--font-middle)rem;
 }
 .avatarNoImage {
   display: flex;
