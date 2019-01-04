@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card :class="$style.card">
     <v-toolbar flat dense dark color="primary">
       <v-btn icon dark @click="$emit('close')">
         <v-icon>close</v-icon>
@@ -204,6 +204,9 @@ export default Vue.extend({
 
 <style module>
 
+.card {
+  -webkit-overflow-scrolling: touch;
+}
 .title {
   font-size: .8rem;
   font-weight: bold;
