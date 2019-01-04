@@ -31,7 +31,7 @@
 
         <v-card-actions>
           <!-- TODO:削除ボタンで削除、完了ボタンで全完了したいです -->
-          <v-btn flat small color="primary">削除</v-btn>
+          <v-btn flat small icon color="primary"><v-icon dark>delete</v-icon></v-btn>
           <v-btn flat small color="primary">完了</v-btn>
           <v-spacer></v-spacer>
           <!-- TODO:全部一気に開いちゃうのでおたすけください…！ -->
