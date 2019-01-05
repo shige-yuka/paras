@@ -22,10 +22,24 @@ import WantTo from '~/components/lv1/WantTo.vue'
 import VIconPhoto from '~/components/icon/Photo.vue'
 
 export default Vue.extend({
-
   components: {
     WantTo,
     VIconPhoto
+  },
+  data() {
+    return {
+      avatar: false,
+      statuses: [
+        {label: '達成', count: 0},
+        {label: 'おせっかい', count: 0},
+        {label: 'スキル', count: 0},
+      ]
+    }
+  },
+  methods: {
+    change: function() {
+      return false
+    }
   }
 })
 </script>
