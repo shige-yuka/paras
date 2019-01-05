@@ -8,8 +8,9 @@
             <h3 :class="$style.title">{{ pItems.title }}</h3>
             <!-- TODO:そしてチェックする毎によくできましたモーダルを表示したいです(デザインまだです) -->
             <v-checkbox
-              v-model="pItems.plans.find(plans => plans.isChecked === false).isChecked"
-              :label="pItems.plans.find(plans => plans.isChecked === false).plan"
+              v-model="getFirstPlans(pItems.plans).isChecked"
+              @click="success"
+              :label="getFirstPlans(pItems.plans).plan"
               :class="$style.todo"
               color="cyan"
             ></v-checkbox>
@@ -44,7 +45,6 @@
                 <!-- TODO:こちら側はチェックしてもよくできましたモーダルは表示しません -->
                 <v-checkbox
                   v-model="p.isChecked"
-                  @click="Success"
                   :label="`${p.day} ${p.plan}`"
                   :class="$style.todo"
                   color="cyan"
@@ -124,8 +124,11 @@
       ],
     }),
     methods: {
-      Success: function() {
+      success: function() {
         console.log('success!!!!!!!!!!')
+      },
+      getFirstPlans: function(array: any[]) {
+        return array.find(plans => plans.isChecked === false)
       }
     }
   })
