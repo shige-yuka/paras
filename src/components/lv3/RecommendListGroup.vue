@@ -34,14 +34,13 @@
           <v-btn flat icon color="primary"><v-icon dark>delete</v-icon></v-btn>
           <v-btn flat small color="primary">完了</v-btn>
           <v-spacer></v-spacer>
-          <!-- TODO:全部一気に開いちゃうのでおたすけください…！ -->
-          <v-btn icon @click="show = !show">
-            <v-icon>{{ show ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</v-icon>
+          <v-btn icon @click="pItems.isShow = !pItems.isShow">
+            <v-icon>{{ pItems.isShow ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</v-icon>
           </v-btn>
         </v-card-actions>
-        
+
         <v-slide-y-transition>
-          <v-card-text v-show="show">
+          <v-card-text v-show="pItems.isShow">
             <ul>
               <li v-for="(p, index) in plans" :key="index">
                 <!-- TODO:こちら側はチェックしてもよくできましたモーダルは表示しません -->
@@ -66,9 +65,42 @@
     data: () => ({
       show: false,
       planItems: [
-        {src: require('~/assets/img/img-sample2.png'), title: 'おいしい食パンを焼く', plan: '食パンのレシピを検索する', day: '2019/1/11', categoryLv1: '料理', categoryLv2: 'パン', ratio: 1, numerator: 0, denominator: 13},
-        {src: require('~/assets/img/img-sample4.png'), title: 'スカイダイビングをする', plan: 'スカイダイビングで検索', day: '2019/1/11', categoryLv1: 'レジャー・スポーツ', categoryLv2: '空', ratio: 1, numerator: 0, denominator: 12},
-        {src: require('~/assets/img/img-sample3.png'), title: 'プランターでブルーベリーを育てる', plan: 'ブルーベリー 育て方 で検索', day: '2019/1/11', categoryLv1: '園芸', categoryLv2: 'フルーツ', ratio: 1, numerator: 0, denominator: 22}
+        {
+          src: require('~/assets/img/img-sample2.png'),
+          title: 'おいしい食パンを焼く',
+          plan: '食パンのレシピを検索する',
+          day: '2019/1/11',
+          categoryLv1: '料理',
+          categoryLv2: 'パン',
+          ratio: 1,
+          numerator: 0,
+          denominator: 13,
+          isShow: false
+        },
+        {
+          src: require('~/assets/img/img-sample4.png'),
+          title: 'スカイダイビングをする',
+          plan: 'スカイダイビングで検索',
+          day: '2019/1/11',
+          categoryLv1: 'レジャー・スポーツ',
+          categoryLv2: '空',
+          ratio: 1,
+          numerator: 0,
+          denominator: 12,
+          isShow: false
+        },
+        {
+          src: require('~/assets/img/img-sample3.png'),
+          title: 'プランターでブルーベリーを育てる',
+          plan: 'ブルーベリー 育て方 で検索',
+          day: '2019/1/11',
+          ategoryLv1: '園芸',
+          categoryLv2: 'フルーツ',
+          ratio: 1,
+          numerator: 0,
+          denominator: 22,
+          isShow: false
+        }
       ],
       // TODO:todoが全部同じ内容になっちゃったのでおたすけください
       plans: [
