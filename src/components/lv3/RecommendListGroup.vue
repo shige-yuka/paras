@@ -6,11 +6,10 @@
         <v-card-title primary-title>
           <div :class="$style.overview">
             <h3 :class="$style.title">{{ pItems.title }}</h3>
-            <!-- TODO:チェックすると次のタスクが表示されるようにしたいです -->
             <!-- TODO:そしてチェックする毎によくできましたモーダルを表示したいです(デザインまだです) -->
             <v-checkbox
-              v-model="checkbox"
-              :label="pItems.plan"
+              v-model="pItems.plans.find(plans => plans.isChecked === false).isChecked"
+              :label="pItems.plans.find(plans => plans.isChecked === false).plan"
               :class="$style.todo"
               color="cyan"
             ></v-checkbox>
@@ -24,8 +23,7 @@
               color="cyan lighten-1"
               :value="pItems.ratio"
             ></v-progress-linear>
-            <!-- TODO:全todoの数を分母に、完了した数を分子に表示したいです -->
-            <span :class="$style.attainment">{{ pItems.numerator }}/{{ pItems.denominator }}</span>
+            <span :class="$style.attainment">{{ pItems.plans.filter(plan => plan.isChecked === true).length }}/{{ pItems.plans.length }}</span>
           </div>
         </v-card-title>
 
@@ -42,10 +40,11 @@
         <v-slide-y-transition>
           <v-card-text v-show="pItems.isShow">
             <ul>
-              <li v-for="(p, index) in plans" :key="index">
+              <li v-for="(p, index) in pItems.plans" :key="index">
                 <!-- TODO:こちら側はチェックしてもよくできましたモーダルは表示しません -->
                 <v-checkbox
-                  v-model="checkbox"
+                  v-model="p.isChecked"
+                  @click="Success"
                   :label="`${p.day} ${p.plan}`"
                   :class="$style.todo"
                   color="cyan"
@@ -74,8 +73,23 @@
           categoryLv2: 'パン',
           ratio: 1,
           numerator: 0,
-          denominator: 13,
-          isShow: false
+          // denominator: plans.length,
+          isShow: false,
+          plans: [
+            {day: '1/11', plan: '食パンのレシピを検索する', isChecked: false},
+            {day: '1/17', plan: '食パン作りの道具を揃える', isChecked: true},
+            {day: '1/17', plan: '食パン作りの材料を揃える', isChecked: false},
+            {day: '1/18', plan: 'プレーンな食パンを焼く', isChecked: false},
+            {day: '1/24', plan: 'くるみ食パンの材料を追加購入する', isChecked: false},
+            {day: '1/25', plan: 'くるみ食パンを焼く', isChecked: false},
+            {day: '1/31', plan: 'ドライフルーツ食パンの材料を追加購入する', isChecked: false},
+            {day: '2/1', plan: 'ドライフルーツ食パンを焼く', isChecked: false},
+            {day: '2/7', plan: 'チョコマーブル食パンの材料を追加購入する', isChecked: false},
+            {day: '2/8', plan: 'チョコマーブル食パンを焼く', isChecked: false},
+            {day: '2/14', plan: '自信がある食パンの材料を追加購入する', isChecked: false},
+            {day: '2/15', plan: '自信がある食パンを焼く', isChecked: false},
+            {day: '2/15', plan: '焼いた食パンを誰かにふるまい「おいしい」と言ってもらう', isChecked: false}
+          ]
         },
         {
           src: require('~/assets/img/img-sample4.png'),
@@ -87,7 +101,10 @@
           ratio: 1,
           numerator: 0,
           denominator: 12,
-          isShow: false
+          isShow: false,
+          plans: [
+            {day: '1/11', plan: 'スカイダイビングについて必要なものを調べたりする', isChecked: false},
+          ]
         },
         {
           src: require('~/assets/img/img-sample3.png'),
@@ -99,26 +116,18 @@
           ratio: 1,
           numerator: 0,
           denominator: 22,
-          isShow: false
+          isShow: false,
+          plans: [
+            {day: '1/11', plan: 'ブルーベリーを育てるために必要なものを調べる', isChecked: false},
+          ]
         }
       ],
-      // TODO:todoが全部同じ内容になっちゃったのでおたすけください
-      plans: [
-        {day: '1/11', plan: '食パンのレシピを検索する'},
-        {day: '1/17', plan: '食パン作りの道具を揃える'},
-        {day: '1/17', plan: '食パン作りの材料を揃える'},
-        {day: '1/18', plan: 'プレーンな食パンを焼く'},
-        {day: '1/24', plan: 'くるみ食パンの材料を追加購入する'},
-        {day: '1/25', plan: 'くるみ食パンを焼く'},
-        {day: '1/31', plan: 'ドライフルーツ食パンの材料を追加購入する'},
-        {day: '2/1', plan: 'ドライフルーツ食パンを焼く'},
-        {day: '2/7', plan: 'チョコマーブル食パンの材料を追加購入する'},
-        {day: '2/8', plan: 'チョコマーブル食パンを焼く'},
-        {day: '2/14', plan: '自信がある食パンの材料を追加購入する'},
-        {day: '2/15', plan: '自信がある食パンを焼く'},
-        {day: '2/15', plan: '焼いた食パンを誰かにふるまい「おいしい」と言ってもらう'}
-      ]
-    })
+    }),
+    methods: {
+      Success: function() {
+        console.log('success!!!!!!!!!!')
+      }
+    }
   })
 </script>
 
