@@ -9,7 +9,7 @@
           <v-flex xs12>
             <v-btn color="indigo" block dark large :class="$style.snslogin" to="/user">Facebookアカウントで作成</v-btn>
             <v-btn color="light-blue" block dark large :class="$style.snslogin" to="/user">Twitterアカウントで作成</v-btn>
-            <v-btn color="blue" block dark large :class="$style.snslogin" @click="googleLogin">Googleアカウントで作成</v-btn>
+            <v-btn color="blue" block dark large :class="$style.snslogin" @click="callAuth">Googleアカウントで作成</v-btn>
           </v-flex>
           <v-divider dark :class="$style.border"></v-divider>
           <v-flex xs12>
@@ -33,14 +33,13 @@
 
 <script lang="ts">
 import Vue from 'vue'
-// import firebase from '@/plugins/firebase'
+import firebase from '@/plugins/firebase'
+import { mapGetters, mapActions } from 'vuex'
 
 export default Vue.extend({
   name: 'SignUp',
   methods: {
-    googleLogin: function() {
-      // firebase.auth().signInWithRedirect(new firebase.auth.GoogleAuthProvider());
-    }
+    ...mapActions(['callAuth'])
   }
 })
 </script>
