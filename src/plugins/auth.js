@@ -1,4 +1,4 @@
-import * as firebase from '@/plugins/firebase'
+import firebase from '@/plugins/firebase'
 
 function auth() {
   return new Promise((resolve, reject) => {
@@ -7,4 +7,5 @@ function auth() {
     })
   })
 }
+
 export default auth

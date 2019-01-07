@@ -32,11 +32,17 @@ export default Vue.extend({
   },
   data() {
     return {
+      avatar: false,
       statuses: [
         {label: '達成', count: 0},
         {label: 'おせっかい', count: 0},
         {label: 'スキル', count: 0},
       ]
+    }
+  },
+  methods: {
+    change: function() {
+      return false
     }
   }
 })
