@@ -1,13 +1,13 @@
 <template>
   <div>
-    <div :class="$style.target">
+    <div v-if="true" :class="$style.target">
       <label for="cover" :class="$style.coverUpload">
         <v-icon-photo :class="$style.cover" />
         <input :class="$style.uploadButton" id="cover" type="file" @change="change">
       </label>
     </div>
     <!-- TODO: カバー画像がアップロードされたらimgタグに差し替えたい -->
-    <!-- <img :src="cover" :class="$style.target"> -->
+    <img v-else :src="cover" :class="$style.target">
   </div>
 </template>
 
@@ -18,6 +18,11 @@ import VIconPhoto from '~/components/icon/Photo.vue'
 export default Vue.extend({
   components: {
     VIconPhoto
+  },
+  methods: {
+    change: function() {
+      return false
+    }
   }
 })
 </script>
