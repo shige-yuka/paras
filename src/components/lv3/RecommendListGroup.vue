@@ -122,7 +122,7 @@
           title: 'プランターでブルーベリーを育てる',
           plan: 'ブルーベリー 育て方 で検索',
           day: '2019/1/11',
-          ategoryLv1: '園芸',
+          categoryLv1: '園芸',
           categoryLv2: 'フルーツ',
           ratio: 1,
           numerator: 0,
