@@ -215,7 +215,7 @@
   margin-top: var(--narrow);
 }
 .todo label {
-  font-size: .9rem;
+  font-size: 1rem;
 }
 .todo div {
   margin-bottom: 0 !important;
