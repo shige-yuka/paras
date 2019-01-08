@@ -19,7 +19,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import WantTo from '~/components/lv1/WantTo.vue'
-import VIconPhoto from '~/components/icon/Photo.vue'
+import VIconPhoto from '~/components/icon/photo.vue'
 
 export default Vue.extend({
   components: {
