@@ -21,7 +21,7 @@
             <span :class="$style.category">{{ pItems.categoryLv2 }}</span>
             <v-progress-linear
               :class="$style.progress"
-              background-color="cyan lighten-3"
+              background-color="cyan lighten-4"
               color="cyan lighten-1"
               :value="pItems.plans.filter(plan => plan.isChecked === true).length / pItems.plans.length * 100"
             ></v-progress-linear>
