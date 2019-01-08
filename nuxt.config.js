@@ -49,6 +49,9 @@ module.exports = {
       extendConfig(config)
     }
   },
+  plugins: [
+    '~/plugins/twemoji'
+  ],
   modules: [
     '@nuxtjs/vuetify'
   ],

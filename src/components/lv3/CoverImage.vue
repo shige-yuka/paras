@@ -13,7 +13,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import VIconPhoto from '~/components/icon/Photo.vue'
+import VIconPhoto from '~/components/icon/photo.vue'
 
 export default Vue.extend({
   components: {
