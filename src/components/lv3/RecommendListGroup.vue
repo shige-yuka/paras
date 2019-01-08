@@ -6,7 +6,7 @@
         <v-card-title primary-title>
           <div :class="$style.overview">
             <h3 :class="$style.title">{{ pItems.title }}</h3>
-            <!-- TODO:そしてチェックする毎によくできましたモーダルを表示したいです(デザインまだです) -->
+            <!-- TODO:そしてチェックする毎によくできましたモーダルを表示したいです(デザインできました) -->
             <v-checkbox
               v-model="pItems.plans.find(plans => plans.isChecked === false).isChecked"
               :key="index"
@@ -15,10 +15,10 @@
               :class="$style.todo"
               color="cyan"
             ></v-checkbox>
-            <p :class="$style.term">期限：{{ pItems.day }}</p>
+            <!-- TODO:期限も更新されるようにしたいです…！ -->
+            <p :class="$style.term">期限：{{ getFirstPlans(pItems.plans).year }}{{ getFirstPlans(pItems.plans).day }}</p>
             <span :class="$style.category">{{ pItems.categoryLv1 }}</span>
             <span :class="$style.category">{{ pItems.categoryLv2 }}</span>
-            <!-- TODO:チェックボックスにチェックを入れるとプログレスバーが増えるようにしたいです -->
             <v-progress-linear
               :class="$style.progress"
               background-color="cyan lighten-3"
@@ -68,7 +68,6 @@
           src: require('~/assets/img/img-sample2.png'),
           title: 'おいしい食パンを焼く',
           plan: '食パンのレシピを検索する',
-          day: '2019/1/11',
           categoryLv1: '料理',
           categoryLv2: 'パン',
           ratio: 1,
@@ -76,26 +75,25 @@
           // denominator: plans.length,
           isShow: false,
           plans: [
-            {day: '1/11', plan: '食パンのレシピを検索する', isChecked: false},
-            {day: '1/17', plan: '食パン作りの道具を揃える', isChecked: false},
-            {day: '1/17', plan: '食パン作りの材料を揃える', isChecked: false},
-            {day: '1/18', plan: 'プレーンな食パンを焼く', isChecked: false},
-            {day: '1/24', plan: 'くるみ食パンの材料を追加購入する', isChecked: false},
-            {day: '1/25', plan: 'くるみ食パンを焼く', isChecked: false},
-            {day: '1/31', plan: 'ドライフルーツ食パンの材料を追加購入する', isChecked: false},
-            {day: '2/1', plan: 'ドライフルーツ食パンを焼く', isChecked: false},
-            {day: '2/7', plan: 'チョコマーブル食パンの材料を追加購入する', isChecked: false},
-            {day: '2/8', plan: 'チョコマーブル食パンを焼く', isChecked: false},
-            {day: '2/14', plan: '自信がある食パンの材料を追加購入する', isChecked: false},
-            {day: '2/15', plan: '自信がある食パンを焼く', isChecked: false},
-            {day: '2/15', plan: '焼いた食パンを誰かにふるまい「おいしい」と言ってもらう', isChecked: false}
+            {year: '2019/', day: '1/11', plan: '食パンのレシピを検索する', isChecked: false},
+            {year: '2019/', day: '1/17', plan: '食パン作りの道具を揃える', isChecked: false},
+            {year: '2019/', day: '1/17', plan: '食パン作りの材料を揃える', isChecked: false},
+            {year: '2019/', day: '1/18', plan: 'プレーンな食パンを焼く', isChecked: false},
+            {year: '2019/', day: '1/24', plan: 'くるみ食パンの材料を追加購入する', isChecked: false},
+            {year: '2019/', day: '1/25', plan: 'くるみ食パンを焼く', isChecked: false},
+            {year: '2019/', day: '1/31', plan: 'ドライフルーツ食パンの材料を追加購入する', isChecked: false},
+            {year: '2019/', day: '2/1', plan: 'ドライフルーツ食パンを焼く', isChecked: false},
+            {year: '2019/', day: '2/7', plan: 'チョコマーブル食パンの材料を追加購入する', isChecked: false},
+            {year: '2019/', day: '2/8', plan: 'チョコマーブル食パンを焼く', isChecked: false},
+            {year: '2019/', day: '2/14', plan: '自信がある食パンの材料を追加購入する', isChecked: false},
+            {year: '2019/', day: '2/15', plan: '自信がある食パンを焼く', isChecked: false},
+            {year: '2019/', day: '2/15', plan: '焼いた食パンを誰かにふるまい「おいしい」と言ってもらう', isChecked: false}
           ]
         },
         {
           src: require('~/assets/img/img-sample4.png'),
           title: 'スカイダイビングをする',
           plan: 'スカイダイビングで検索',
-          day: '2019/1/11',
           categoryLv1: 'レジャー・スポーツ',
           categoryLv2: '空',
           ratio: 1,
@@ -103,25 +101,24 @@
           denominator: 12,
           isShow: false,
           plans: [
-            {day: '1/11', plan: 'スカイダイビングで検索', isChecked: false},
-            {day: '1/11', plan: '年齢、身長、体重、健康状態が制限に引っかからないか念入りに調べる', isChecked: false},
-            {day: '1/11', plan: 'スカイダイビング貯金を始める', isChecked: false},
-            {day: '1/11', plan: 'スカイダイビングができる体重に調整し始める', isChecked: false},
-            {day: '1/17', plan: '貯金と体重調整の目処が立ったら、休みを調整してスカイダイビングの予約を取る(撮影サービスも予約するのがおすすめ)', isChecked: false},
-            {day: '1/18', plan: '海外でスカイダイビングする場合はパスポートを準備する', isChecked: false},
-            {day: '1/18', plan: '体重を確認する', isChecked: false},
-            {day: '1/25', plan: '再度体重を確認する', isChecked: false},
-            {day: '2/1', plan: '再々度体重を確認する', isChecked: false},
-            {day: '2/8', plan: 'スカイダイビングに適した動きやすい服と靴を揃える', isChecked: false},
-            {day: '2/15', plan: 'スカイダイビングに挑む', isChecked: false},
-            {day: '2/15', plan: 'スカイダイビングの思い出を記録に残す', isChecked: false},
+            {year: '2019/', day: '1/11', plan: 'スカイダイビングで検索', isChecked: false},
+            {year: '2019/', day: '1/11', plan: '年齢、身長、体重、健康状態が制限に引っかからないか念入りに調べる', isChecked: false},
+            {year: '2019/', day: '1/11', plan: 'スカイダイビング貯金を始める', isChecked: false},
+            {year: '2019/', day: '1/11', plan: 'スカイダイビングができる体重に調整し始める', isChecked: false},
+            {year: '2019/', day: '1/17', plan: '貯金と体重調整の目処が立ったら、休みを調整してスカイダイビングの予約を取る(撮影サービスも予約するのがおすすめ)', isChecked: false},
+            {year: '2019/', day: '1/18', plan: '海外でスカイダイビングする場合はパスポートを準備する', isChecked: false},
+            {year: '2019/', day: '1/18', plan: '体重を確認する', isChecked: false},
+            {year: '2019/', day: '1/25', plan: '再度体重を確認する', isChecked: false},
+            {year: '2019/', day: '2/1', plan: '再々度体重を確認する', isChecked: false},
+            {year: '2019/', day: '2/8', plan: 'スカイダイビングに適した動きやすい服と靴を揃える', isChecked: false},
+            {year: '2019/', day: '2/15', plan: 'スカイダイビングに挑む', isChecked: false},
+            {year: '2019/', day: '2/15', plan: 'スカイダイビングの思い出を記録に残す', isChecked: false},
           ]
         },
         {
           src: require('~/assets/img/img-sample3.png'),
           title: 'プランターでブルーベリーを育てる',
           plan: 'ブルーベリー 育て方 で検索',
-          day: '2019/1/11',
           categoryLv1: '園芸',
           categoryLv2: 'フルーツ',
           ratio: 1,
@@ -129,28 +126,28 @@
           denominator: 22,
           isShow: false,
           plans: [
-            {day: '1/11', plan: 'ブルーベリー 育て方 で検索', isChecked: false},
-            {day: '1/18', plan: '毎日可愛がる決意をする', isChecked: false},
-            {day: '1/18', plan: '育てる地域に適した品種で、同系統で別品種、開花時期が同時期の2年生苗を2本以上購入', isChecked: false},
-            {day: '1/18', plan: 'ブルーベリー作りに必要な道具を揃える(剪定バサミ、バケツなど)', isChecked: false},
-            {day: '1/18', plan: 'ブルーベリー作りに必要な土と肥料を揃える(未調整のピートモスなど)', isChecked: false},
-            {day: '1/18', plan: '土を作る', isChecked: false},
-            {day: '1/18', plan: 'ブルーベリーを植える', isChecked: false},
-            {day: '1/19', plan: '土の表面が乾いたら水やりをする', isChecked: false},
-            {day: '3/1', plan: '暖かくなって来たら水やりの頻度を見直す(増やす)', isChecked: false},
-            {day: '3/8', plan: '春肥を与える', isChecked: false},
-            {day: '4/1', plan: '開花を見守る', isChecked: false},
-            {day: '4/1', plan: '虫での受粉が難しい場合は人工授粉を検討する', isChecked: false},
-            {day: '4/1', plan: '鳥から花と実を守るために鳥よけグッズを購入する', isChecked: false},
-            {day: '5/1', plan: '夏肥を与える', isChecked: false},
-            {day: '6/1', plan: '実がつくのを見守る', isChecked: false},
-            {day: '7/1', plan: '青くなって数日経過し、熟した実を一つずつ収穫する', isChecked: false},
-            {day: '8/1', plan: '引き続き熟した実を一つずつ収穫する', isChecked: false},
-            {day: '9/1', plan: 'すべての実を収穫し終えたら礼肥を与える', isChecked: false},
-            {day: '10/1', plan: '寒くなって来たら水やりの頻度を見直す(減らす)', isChecked: false},
-            {day: '11/1', plan: '落葉したら、必要に応じて枝を剪定する(枝が少ない場合は不要)', isChecked: false},
-            {day: '11/1', plan: '枝が大きくなっていたら大きな鉢に植え替える', isChecked: false},
-            {day: '12/1', plan: '冬場も毎日可愛がる', isChecked: false},
+            {year: '2019/', day: '1/11', plan: 'ブルーベリー 育て方 で検索', isChecked: false},
+            {year: '2019/', day: '1/18', plan: '毎日可愛がる決意をする', isChecked: false},
+            {year: '2019/', day: '1/18', plan: '育てる地域に適した品種で、同系統で別品種、開花時期が同時期の2年生苗を2本以上購入', isChecked: false},
+            {year: '2019/', day: '1/18', plan: 'ブルーベリー作りに必要な道具を揃える(剪定バサミ、バケツなど)', isChecked: false},
+            {year: '2019/', day: '1/18', plan: 'ブルーベリー作りに必要な土と肥料を揃える(未調整のピートモスなど)', isChecked: false},
+            {year: '2019/', day: '1/18', plan: '土を作る', isChecked: false},
+            {year: '2019/', day: '1/18', plan: 'ブルーベリーを植える', isChecked: false},
+            {year: '2019/', day: '1/19', plan: '土の表面が乾いたら水やりをする', isChecked: false},
+            {year: '2019/', day: '3/1', plan: '暖かくなって来たら水やりの頻度を見直す(増やす)', isChecked: false},
+            {year: '2019/', day: '3/8', plan: '春肥を与える', isChecked: false},
+            {year: '2019/', day: '4/1', plan: '開花を見守る', isChecked: false},
+            {year: '2019/', day: '4/1', plan: '虫での受粉が難しい場合は人工授粉を検討する', isChecked: false},
+            {year: '2019/', day: '4/1', plan: '鳥から花と実を守るために鳥よけグッズを購入する', isChecked: false},
+            {year: '2019/', day: '5/1', plan: '夏肥を与える', isChecked: false},
+            {year: '2019/', day: '6/1', plan: '実がつくのを見守る', isChecked: false},
+            {year: '2019/', day: '7/1', plan: '青くなって数日経過し、熟した実を一つずつ収穫する', isChecked: false},
+            {year: '2019/', day: '8/1', plan: '引き続き熟した実を一つずつ収穫する', isChecked: false},
+            {year: '2019/', day: '9/1', plan: 'すべての実を収穫し終えたら礼肥を与える', isChecked: false},
+            {year: '2019/', day: '10/1', plan: '寒くなって来たら水やりの頻度を見直す(減らす)', isChecked: false},
+            {year: '2019/', day: '11/1', plan: '落葉したら、必要に応じて枝を剪定する(枝が少ない場合は不要)', isChecked: false},
+            {year: '2019/', day: '11/1', plan: '枝が大きくなっていたら大きな鉢に植え替える', isChecked: false},
+            {year: '2019/', day: '12/1', plan: '冬場も毎日可愛がる', isChecked: false},
           ]
         }
       ],
