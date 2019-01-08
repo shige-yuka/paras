@@ -42,6 +42,7 @@ module.exports = {
 	'--base-white-opacity': 'rgba(255, 255, 255, .2)',
 	'--gray-light': '#F7F8FA',
 	'--gray-lighter': '#A6B8C5',
+	'--gray-lighten': '#E0E0E0',
 	'--base-gray': '#6E8290',
 	'--base-font-color': '#52636E',
 	'--font-color-disabled': '#D5D3D3',
