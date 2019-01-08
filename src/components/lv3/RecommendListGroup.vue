@@ -23,7 +23,7 @@
               :class="$style.progress"
               background-color="cyan lighten-3"
               color="cyan lighten-1"
-              :value="pItems.plans.filter(plan => plan.isChecked === true).length"
+              :value="pItems.plans.filter(plan => plan.isChecked === true).length / pItems.plans.length * 100"
             ></v-progress-linear>
             <span :class="$style.attainment">{{ pItems.plans.filter(plan => plan.isChecked === true).length }}/{{ pItems.plans.length }}</span>
           </div>
