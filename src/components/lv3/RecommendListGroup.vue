@@ -7,6 +7,7 @@
           <div :class="$style.overview">
             <h3 :class="$style.title">{{ pItems.title }}</h3>
             <!-- TODO:そしてチェックする毎によくできましたモーダルを表示したいです(デザインできました) -->
+            <!-- TODO:checkが入ると、fadeoutのclassを追加してフワッと消して、次のタスクが表示されるようにしたいです -->
             <v-checkbox
               v-model="pItems.plans.find(plans => plans.isChecked === false).isChecked"
               :key="index"
@@ -266,5 +267,18 @@
   color: #4F4F4F;
   font-size: 1rem;
 }
-
+.fadeout {
+  animation-name: fadeOut;
+  animation-duration: .6s;
+  animation-fill-mode: both;
+  animation-delay: 1s;
+}
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
 </style>
