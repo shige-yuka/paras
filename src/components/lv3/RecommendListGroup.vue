@@ -8,8 +8,9 @@
             <h3 :class="$style.title">{{ pItems.title }}</h3>
             <!-- TODO:そしてチェックする毎によくできましたモーダルを表示したいです(デザインまだです) -->
             <v-checkbox
-              v-model="getFirstPlans(pItems.plans).isChecked"
-              @click="success"
+              v-model="pItems.plans.find(plans => plans.isChecked === false).isChecked"
+              :key="index"
+              @click="getFirstPlans(pItems.plans).isChecked"
               :label="getFirstPlans(pItems.plans).plan"
               :class="$style.todo"
               color="cyan"
@@ -22,7 +23,7 @@
               :class="$style.progress"
               background-color="cyan lighten-3"
               color="cyan lighten-1"
-              :value="pItems.ratio"
+              :value="pItems.plans.filter(plan => plan.isChecked === true).length"
             ></v-progress-linear>
             <span :class="$style.attainment">{{ pItems.plans.filter(plan => plan.isChecked === true).length }}/{{ pItems.plans.length }}</span>
           </div>
@@ -42,7 +43,6 @@
           <v-card-text v-show="pItems.isShow">
             <ul>
               <li v-for="(p, index) in pItems.plans" :key="index">
-                <!-- TODO:こちら側はチェックしてもよくできましたモーダルは表示しません -->
                 <v-checkbox
                   v-model="p.isChecked"
                   :label="`${p.day} ${p.plan}`"
