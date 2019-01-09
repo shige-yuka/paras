@@ -2,7 +2,7 @@
   <section>
     <div :class="$style.globalHeader">
       <h1 :class="$style.logo"><v-logo /></h1>
-      <v-btn flat small color="orange" to="/login">ログイン</v-btn>
+      <v-btn flat small color="orange" @click="dialog=true" slot="activator">ログイン</v-btn>
       <v-btn @click="dialog=true" slot="activator" small dark color="amber darken-2" class="mr-0">アカウント作成</v-btn>
     </div>
     <v-dialog v-model="dialog" width="400px">
