@@ -1,6 +1,6 @@
 <template>
   <ul :class="[$style.grid, $style.cal3]">
-    <li :class="[$style.item]" v-for="(pItems, index) in planItems" :key="index">
+    <li :class="[$style.item]" v-for="(pItems, index) in plans" :key="index">
       <v-card>
         <img :src="pItems.src" :class="$style.img">
         <v-card-title primary-title>
@@ -11,7 +11,7 @@
             <v-checkbox
               v-model="pItems.plans.find(plans => plans.isChecked === false).isChecked"
               :key="index"
-              @click="getFirstPlans(pItems.plans).isChecked"
+              @click="isCheeringModal = true"
               :label="getFirstPlans(pItems.plans).plan"
               :class="$style.todo"
               color="cyan"
@@ -24,7 +24,7 @@
               :class="$style.progress"
               background-color="cyan lighten-4"
               color="cyan lighten-1"
-              :value="pItems.plans.filter(plan => plan.isChecked === true).length / pItems.plans.length * 100"
+              v-model="pItems.plans.filter(plan => plan.isChecked === true).length / pItems.plans.length * 100"
             ></v-progress-linear>
             <span :class="$style.attainment">{{ pItems.plans.filter(plan => plan.isChecked === true).length }}/{{ pItems.plans.length }}</span>
           </div>
@@ -45,6 +45,7 @@
             <ul>
               <li v-for="(p, index) in pItems.plans" :key="index">
                 <v-checkbox
+                  @click="isCheeringModal = true"
                   v-model="p.isChecked"
                   :label="`${p.day} ${p.plan}`"
                   :class="$style.todo"
@@ -56,13 +57,21 @@
         </v-slide-y-transition>
       </v-card>
     </li>
+    <v-dialog v-model="isCheeringModal" max-width="300px">
+      <cheering @close="isCheeringModal=false" />
+    </v-dialog>
   </ul>
 </template>
 
 <script lang="ts">
   import Vue from 'vue'
+  import Cheering from '~/components/lv3/dialog/Cheering.vue'
   export default Vue.extend({
+    components: {
+      Cheering
+    },
     data: () => ({
+      isCheeringModal: false,
       show: false,
       planItems: [
         {
@@ -159,6 +168,11 @@
       },
       getFirstPlans: function(array: any[]) {
         return array.find(plans => plans.isChecked === false)
+      }
+    },
+    computed: {
+      plans: function () {
+        return this.planItems
       }
     }
   })
