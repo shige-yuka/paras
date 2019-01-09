@@ -44,6 +44,7 @@
             <ul>
               <li v-for="(p, index) in pItems.plans" :key="index">
                 <v-checkbox
+                  @click="isCheeringModal = true"
                   v-model="p.isChecked"
                   :label="`${p.day} ${p.plan}`"
                   :class="$style.todo"
