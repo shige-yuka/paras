@@ -13,10 +13,10 @@
           </v-flex>
           <v-divider dark :class="$style.border"></v-divider>
           <v-flex xs12>
-            <v-text-field label="Email" required dark color="blue-grey darken-4"></v-text-field>
+            <v-text-field disabled label="Email" required dark color="blue-grey darken-4"></v-text-field>
           </v-flex>
           <v-flex xs12>
-            <v-text-field label="Password" type="password" require dark color="blue-grey darken-4"></v-text-field>
+            <v-text-field disabled label="Password" type="password" require dark color="blue-grey darken-4"></v-text-field>
           </v-flex>
           <v-flex xs12>
             <v-btn disabled color="white" outline block>アカウント作成</v-btn>
