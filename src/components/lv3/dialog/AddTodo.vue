@@ -32,6 +32,7 @@
             <v-btn
               color="primary"
               @click="e1 = 2"
+              disabled
             >
               自分で登録する
             </v-btn>
