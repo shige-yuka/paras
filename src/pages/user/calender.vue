@@ -1,7 +1,19 @@
 <template>
   <article>
     <section :class="$style.attainments">
-      <headline :class="$style.headline">達成度</headline>
+      <section :class="schedule">
+        <div :class="$style.calenderWrap">
+          <v-date-picker
+            full-width
+            v-model="picker"
+            :landscape="landscape"
+            :reactive="reactive"
+            color="cyan lighten-1"
+            locale="jp-ja"
+            :day-format="date => new Date(date).getDate()"
+          ></v-date-picker>
+        </div>
+      </section>
       <ul :class="$style.list">
         <li :class="$style.item">
           <p :class="$style.attainmentText">
@@ -38,19 +50,7 @@
         </li>
       </ul>
     </section>
-    <section :class="schedule">
-      <div :class="$style.calenderWrap">
-        <v-date-picker
-          full-width
-          v-model="picker"
-          :landscape="landscape"
-          :reactive="reactive"
-          color="cyan lighten-1"
-          locale="jp-ja"
-          :day-format="date => new Date(date).getDate()"
-        ></v-date-picker>
-      </div>
-    </section>
+    
     <v-fab />
   </article>
 </template>
@@ -82,7 +82,24 @@ export default Vue.extend({
 
 <style module>
 .attainments {
+  position: relative;
   padding: var(--wide) var(--default) var(--default);
+}
+.attainments::before {
+  content: "coming soon!";
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background: var(--gray-light);
+  opacity: .8;
+  font-size: 4rem;
+  color: var(--gray-lighter);
+  z-index: 10;
 }
 .headline {
   text-align: center;
