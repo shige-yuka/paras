@@ -1,27 +1,25 @@
 <template>
-  <v-dialog v-model="dialog" max-width="300px">
-    <v-card :class="$style.dialog">
-      <v-card-title>
-        <h3 :class="$style.title">いい感じ！その調子！</h3>
-      </v-card-title>
-      <v-card-text>
-        <div :class="$style.emoji" v-twemoji>{{ random() }}</div>
-      </v-card-text>
-      <v-card-actions>
-        <div :class="$style.startButtonWrap">
-          <v-btn small dark flat color="primary" @click="dialog = false">閉じる</v-btn>
-        </div>
-      </v-card-actions>
-    </v-card>
-  </v-dialog>
+  <v-card :class="$style.dialog">
+    <v-card-title>
+      <h3 :class="$style.title">いい感じ！その調子！</h3>
+    </v-card-title>
+    <v-card-text>
+      <div :class="$style.emoji" v-twemoji>{{ random() }}</div>
+    </v-card-text>
+    <v-card-actions>
+      <div :class="$style.startButtonWrap">
+        <v-btn small dark flat color="primary" @click="$emit('close')">閉じる</v-btn>
+      </div>
+    </v-card-actions>
+  </v-card>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 
 export default Vue.extend({
+  name: 'Cheering',
   data: () => ({
-    dialog: true,
     emoji: ['🎉','🏌️‍♀️','🌸','🐥','🐱','🐺','☺','🍣','🏋️‍♀️','🏊‍♀️','👏','👧','👯‍♀️','👱‍♂️','💃','💪🏻','💯','🕺','😉','😊','🙆‍♀️','🤸🏼'],
   }),
   methods:{
@@ -29,8 +27,6 @@ export default Vue.extend({
       const rnd = Math.floor(Math.random() * this.emoji.length);
       return this.emoji[rnd];
     }
-  },
-  components: {
   }
 })
 </script>
