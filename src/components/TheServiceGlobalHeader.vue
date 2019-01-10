@@ -2,11 +2,14 @@
   <section>
     <div :class="$style.globalHeader">
       <h1 :class="$style.logo"><v-logo /></h1>
-      <v-btn flat small color="orange" @click="dialog=true" slot="activator">ログイン</v-btn>
+      <v-btn @click="loginDialog=true" flat small color="orange" slot="activator">ログイン</v-btn>
       <v-btn @click="dialog=true" slot="activator" small dark color="amber darken-2" class="mr-0">アカウント作成</v-btn>
     </div>
     <v-dialog v-model="dialog" width="400px">
       <sign-up-dialog @close="dialog=false" />
+    </v-dialog>
+    <v-dialog v-model="loginDialog" width="400px">
+      <login-dialog @close="loginDialog=false" />
     </v-dialog>
   </section>
 </template>
@@ -14,17 +17,20 @@
 <script lang="ts">
 import Vue from 'vue'
 import VLogo from '~/components/logo/logo.vue'
+import LoginDialog from '~/components/lv3/dialog/Login.vue'
 import SignUpDialog from '~/components/lv3/dialog/SignUp.vue'
 
 export default Vue.extend({
   data() {
     return {
-      dialog: false
+      dialog: false,
+      loginDialog: false
     }
   },
   components: {
     VLogo,
-    SignUpDialog
+    SignUpDialog,
+    LoginDialog
   }
 })
 </script>
