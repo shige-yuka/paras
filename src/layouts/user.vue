@@ -56,7 +56,7 @@
   display: block;
   width: 100%;
   height: 48px;
-  z-index: 999;
+  z-index: 99;
 }
 .article {
   width: 100%;

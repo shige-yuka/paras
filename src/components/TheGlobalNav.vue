@@ -63,7 +63,7 @@ export default Vue.extend({
   color: var(--base-white);
   overflow-x: hidden;
   overflow-y: scroll;
-  z-index: 999;
+  z-index: 99;
 }
 @media screen and (min-width: 600px) {
   .globalNav {

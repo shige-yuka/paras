@@ -33,7 +33,7 @@
   position: fixed;
   right: 1rem;
   bottom: 4rem;
-  z-index: 9999;
+  z-index: 99;
 }
 @media screen and (min-width: 600px) {
   .buttonWrap {
