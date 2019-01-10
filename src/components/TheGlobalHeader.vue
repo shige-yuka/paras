@@ -2,7 +2,7 @@
   <div :class="$style.globalHeader">
     <h1 :class="$style.logo"><v-logo /></h1>
     <div :class="$style.buttons">
-      <v-btn outline small color="white" :class="$style.button" class="mr-0" to="/">Logout</v-btn>
+      <v-btn outline small color="white" :class="$style.button" class="mr-0" @click="logout">Logout</v-btn>
     </div>
   </div>
 </template>
@@ -10,10 +10,21 @@
 <script lang="ts">
 import Vue from 'vue'
 import VLogo from '~/components/logo/logo.vue'
+import firebase from '@/plugins/firebase'
+import auth from '@/plugins/auth'
 
 export default Vue.extend({
+  data: () => ({
+    userData: null
+  }),
   components: {
     VLogo,
+  },
+  methods: {
+    logout: function() {
+      firebase.auth().signOut();
+      location.href = './';
+    }
   }
 })
 </script>

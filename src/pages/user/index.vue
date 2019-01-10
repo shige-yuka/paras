@@ -27,7 +27,7 @@ import CoverImage from '~/components/lv3/CoverImage.vue'
 import UserStatus from '~/components/lv3/UserStatus.vue'
 import RecommendListGroup from '~/components/lv3/RecommendListGroup.vue'
 import WalkThrough from '~/components/lv3/dialog/WalkThrough.vue'
-import auth from '~/plugins/auth'
+import auth from '@/plugins/auth'
 
 export default Vue.extend({
   layout: 'user',
