@@ -27,10 +27,13 @@ import CoverImage from '~/components/lv3/CoverImage.vue'
 import UserStatus from '~/components/lv3/UserStatus.vue'
 import RecommendListGroup from '~/components/lv3/RecommendListGroup.vue'
 import WalkThrough from '~/components/lv3/dialog/WalkThrough.vue'
+import auth from '~/plugins/auth'
 
 export default Vue.extend({
   layout: 'user',
-
+  data: () => ({
+    userData: null
+  }),
   components: {
     AvatarName,
     CoverImage,
@@ -40,6 +43,12 @@ export default Vue.extend({
     VButton,
     VFab,
     WalkThrough
+  },
+  created: async function() {
+    this.userData = await auth()
+    if (!this.userData) {
+      this.$router.push('/')
+    }
   }
 })
 </script>

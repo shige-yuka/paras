@@ -12,8 +12,11 @@ import MyPage from '~/components/lv2/MyPage.vue'
 import { mapGetters } from 'vuex'
 import auth from '~/plugins/auth'
 
-export default Vue.extend({
+export default {
   layout: 'default',
+  data: () => ({
+    userData: null
+  }),
   components: {
     HeroImage,
     MyPage
@@ -24,5 +27,5 @@ export default Vue.extend({
       this.$router.push('/user')
     }
   }
-})
+}
 </script>
