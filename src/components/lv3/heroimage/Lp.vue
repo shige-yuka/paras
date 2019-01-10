@@ -29,9 +29,6 @@ export default Vue.extend({
   },
   components: {
     SignUpDialog
-  },
-  created() {
-    console.log(process.env)
   }
 })
 </script>

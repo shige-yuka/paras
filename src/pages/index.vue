@@ -1,7 +1,6 @@
 <template>
   <article>
-    <hero-image v-if="!isLogin" />
-    <my-page v-if="isLogin" :user="userData" />
+    <hero-image />
   </article>
 </template>
 
@@ -10,40 +9,22 @@ import Vue from 'vue'
 // import firebase from '@/plugins/firebase'
 import HeroImage from '~/components/lv3/heroimage/Lp.vue'
 import MyPage from '~/components/lv2/MyPage.vue'
+import { mapGetters } from 'vuex'
+import auth from '~/plugins/auth'
 
 export default {
   layout: 'default',
-
+  data: () => ({
+    userData: null
+  }),
   components: {
     HeroImage,
     MyPage
   },
-  asyncData (context) {
-    // コンポーネントをロードする前に毎回呼び出されます
-    return {
-      name: 'Hello, World！！',
-      isLogin:false,
-      userData:null
-    }
-  },
-  fetch () {
-    // `fetch` メソッドはページの描画前にストアを満たすために使用されます
-  },
-  mounted: function() {
-    // firebase.auth().onAuthStateChanged(user => {
-    //   console.log(user);
-    //   if (user) {
-    //     this.isLogin = true;
-    //     this.userData = user;
-    //   } else {
-    //     this.isLogin = false;
-    //     this.userData = null;
-    //   };
-    // });
-  },
-  methods: {
-    googleLogin: function() {
-      firebase.auth().signInWithRedirect(new firebase.auth.GoogleAuthProvider());
+  created: async function() {
+    this.userData = await auth()
+    if (this.userData) {
+      this.$router.push('/user')
     }
   }
 }
