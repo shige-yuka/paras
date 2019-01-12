@@ -7,7 +7,7 @@
       <v-container grid-list-md>
         <v-layout wrap>
           <v-flex xs12>
-            <v-btn disabled color="indigo" block dark large :class="$style.snslogin" to="/user">Facebookアカウントで作成</v-btn>
+            <v-btn color="indigo" block dark large :class="$style.snslogin" @click="callAuth">Facebookアカウントで作成</v-btn>
             <v-btn disabled color="light-blue" block dark large :class="$style.snslogin" to="/user">Twitterアカウントで作成</v-btn>
             <v-btn color="blue" block dark large :class="$style.snslogin" @click="callAuth">Googleアカウントで作成</v-btn>
           </v-flex>
