@@ -1,77 +1,93 @@
 <template>
-  <ul :class="[$style.grid, $style.cal3]">
-    <li :class="[$style.item]" v-for="(pItems, index) in plans" :key="index">
-      <v-card>
-        <img :src="pItems.src" :class="$style.img">
-        <v-card-title primary-title>
-          <div :class="$style.overview">
-            <h3 :class="$style.title">{{ pItems.title }}</h3>
-            <!-- TODO:そしてチェックする毎によくできましたモーダルを表示したいです(デザインできました) -->
-            <!-- TODO:checkが入ると、fadeoutのclassを追加してフワッと消して、次のタスクが表示されるようにしたいです -->
-            <v-checkbox
-              v-model="pItems.plans.find(plans => plans.isChecked === false).isChecked"
-              :key="index"
-              @click="isCheeringModal = true"
-              :label="getFirstPlans(pItems.plans).plan"
-              :class="$style.todo"
-              color="cyan"
-            ></v-checkbox>
-            <!-- TODO:期限も更新されるようにしたいです…！ -->
-            <p :class="$style.term">期限：{{ getFirstPlans(pItems.plans).year }}{{ getFirstPlans(pItems.plans).day }}</p>
-            <span :class="$style.category">{{ pItems.categoryLv1 }}</span>
-            <span :class="$style.category">{{ pItems.categoryLv2 }}</span>
-            <v-progress-linear
-              :class="$style.progress"
-              background-color="cyan lighten-4"
-              color="cyan lighten-1"
-              v-model="pItems.plans.filter(plan => plan.isChecked === true).length / pItems.plans.length * 100"
-            ></v-progress-linear>
-            <span :class="$style.attainment">{{ pItems.plans.filter(plan => plan.isChecked === true).length }}/{{ pItems.plans.length }}</span>
-          </div>
-        </v-card-title>
+  <div>
+    <ul :class="[$style.grid, $style.cal3]">
+      <li :class="[$style.item]" v-for="(pItems, index) in plans" :key="index">
+        <v-card>
+          <img :src="pItems.src" :class="$style.img">
+          <v-card-title primary-title>
+            <div :class="$style.overview">
+              <h3 :class="$style.title">{{ pItems.title }}</h3>
+              <!-- TODO:そしてチェックする毎によくできましたモーダルを表示したいです(デザインできました) -->
+              <!-- TODO:checkが入ると、fadeoutのclassを追加してフワッと消して、次のタスクが表示されるようにしたいです -->
+              <v-checkbox
+                v-model="pItems.plans.find(plans => plans.isChecked === false).isChecked"
+                :key="index"
+                @click="isCheeringModal = true"
+                :label="getFirstPlans(pItems.plans).plan"
+                :class="$style.todo"
+                color="cyan"
+              ></v-checkbox>
+              <!-- TODO:期限も更新されるようにしたいです…！ -->
+              <p :class="$style.term">期限：{{ getFirstPlans(pItems.plans).year }}{{ getFirstPlans(pItems.plans).day }}</p>
+              <span :class="$style.category">{{ pItems.categoryLv1 }}</span>
+              <span :class="$style.category">{{ pItems.categoryLv2 }}</span>
+              <v-progress-linear
+                :class="$style.progress"
+                background-color="cyan lighten-4"
+                color="cyan lighten-1"
+                v-model="pItems.plans.filter(plan => plan.isChecked === true).length / pItems.plans.length * 100"
+              ></v-progress-linear>
+              <span :class="$style.attainment">{{ pItems.plans.filter(plan => plan.isChecked === true).length }}/{{ pItems.plans.length }}</span>
+            </div>
+          </v-card-title>
 
-        <v-card-actions>
-          <!-- TODO:削除ボタンで削除、完了ボタンで全完了したいです -->
-          <v-btn flat icon color="primary"><v-icon dark>delete</v-icon></v-btn>
-          <v-btn flat small color="primary">完了</v-btn>
-          <v-spacer></v-spacer>
-          <v-btn icon @click="pItems.isShow = !pItems.isShow">
-            <v-icon>{{ pItems.isShow ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</v-icon>
-          </v-btn>
-        </v-card-actions>
+          <v-card-actions>
+            <!-- TODO:削除ボタンで削除、完了ボタンで全完了したいです -->
+            <v-btn flat icon color="primary"><v-icon dark>delete</v-icon></v-btn>
+            <v-btn flat small color="primary">完了</v-btn>
+            <v-spacer></v-spacer>
+            <v-btn icon @click="pItems.isShow = !pItems.isShow">
+              <v-icon>{{ pItems.isShow ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</v-icon>
+            </v-btn>
+          </v-card-actions>
 
-        <v-slide-y-transition>
-          <v-card-text v-show="pItems.isShow">
-            <ul>
-              <li v-for="(p, index) in pItems.plans" :key="index">
-                <v-checkbox
-                  @click="isCheeringModal = true"
-                  v-model="p.isChecked"
-                  :label="`${p.day} ${p.plan}`"
-                  :class="$style.todo"
-                  color="cyan"
-                ></v-checkbox>
-              </li>
-            </ul>
-          </v-card-text>
-        </v-slide-y-transition>
-      </v-card>
-    </li>
+          <v-slide-y-transition>
+            <v-card-text v-show="pItems.isShow">
+              <ul>
+                <li v-for="(p, index) in pItems.plans" :key="index">
+                  <v-checkbox
+                    @click="isCheeringModal = true"
+                    v-model="p.isChecked"
+                    :label="`${p.day} ${p.plan}`"
+                    :class="$style.todo"
+                    color="cyan"
+                  ></v-checkbox>
+                </li>
+              </ul>
+            </v-card-text>
+          </v-slide-y-transition>
+        </v-card>
+      </li>
+    </ul>
     <v-dialog v-model="isCheeringModal" max-width="300px">
       <cheering @close="isCheeringModal=false" />
     </v-dialog>
-  </ul>
+    <!-- TODO:全てのタスクを達成したら表示したいです！ -->
+    <!-- <v-dialog v-model="isConfettiModal" max-width="300px">
+      <confetti @close="isConfettiModal=true" />
+    </v-dialog>
+    <div :class="$style.confettiWrap">
+      <div
+        v-for="n in 150" :key="n"
+        :class="`confetti${n}`"
+      >
+      </div>
+    </div> -->
+  </div>
 </template>
 
 <script lang="ts">
   import Vue from 'vue'
   import Cheering from '~/components/lv3/dialog/Cheering.vue'
+  import Confetti from '~/components/lv3/dialog/Confetti.vue'
   export default Vue.extend({
     components: {
-      Cheering
+      Cheering,
+      Confetti
     },
     data: () => ({
       isCheeringModal: false,
+      isConfettiModal: true,
       show: false,
       planItems: [
         {
@@ -295,4 +311,39 @@
     opacity: 0;
   }
 }
+.confettiWrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-height: 100vh;
+  width: 100%;
+  z-index: 201;
+}
+</style>
+
+<style lang="scss">
+  $colors: (#DD2E44, #FFCC4D, #26AAE1, #9266CD, #77B255);
+
+  @for $i from 0 through 150 {
+    $w: random(10);
+    $l: random(100);
+    .confetti#{$i} {
+      position: absolute;
+      width: #{$w}px;
+      height:#{$w*0.6}px;
+      background-color: nth($colors, random(3));
+      top: -10%;
+      left: unquote($l+"%");
+      opacity: random() + 0.5;
+      transform: rotate(#{random()*360}deg);
+      animation: drop-#{$i} unquote(4+random()+"s") unquote(random()+"s") infinite;
+    }
+
+    @keyframes drop-#{$i} {
+      100% {
+        top: 110%;
+        left: unquote($l+random(15)+"%");
+      }
+    }
+  }
 </style>
