@@ -3,6 +3,10 @@
     <ul :class="[$style.grid, $style.cal3]">
       <li :class="[$style.item]" v-for="(pItems, index) in plans" :key="index">
         <v-card>
+          <!-- TODO:達成したらリボンを表示させたいです！あわよくば達成回数を表示できたら…！ -->
+          <!-- <div :class="$style.ribbonWrap">
+            <ribbon>1回達成</ribbon>
+          </div> -->
           <img :src="pItems.src" :class="$style.img">
           <v-card-title primary-title>
             <div :class="$style.overview">
@@ -80,10 +84,12 @@
   import Vue from 'vue'
   import Cheering from '~/components/lv3/dialog/Cheering.vue'
   import Confetti from '~/components/lv3/dialog/Confetti.vue'
+  import Ribbon from '~/components/lv1/Ribbon.vue'
   export default Vue.extend({
     components: {
       Cheering,
-      Confetti
+      Confetti,
+      Ribbon
     },
     data: () => ({
       isCheeringModal: false,
@@ -216,6 +222,11 @@
     width: calc(100% / 3);
     padding: var(--default);
   }
+}
+.ribbonWrap {
+  position: absolute;
+  top: 1.8rem;
+  left: 1.2rem;
 }
 .img {
   width: 100%;
