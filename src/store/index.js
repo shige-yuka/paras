@@ -5,6 +5,7 @@ import { firebaseMutations, firebaseAction } from 'vuexfire'
 const db = firebase.database()
 const usersRef = db.ref('/users')
 const provider = new firebase.auth.GoogleAuthProvider()
+const fbprovider = new firebase.auth.FacebookAuthProvider();
 
 Vue.use(Vuex)
 
@@ -51,6 +52,7 @@ const createStore = () => {
       }),
       callAuth() {
         firebase.auth().signInWithRedirect(provider)
+        firebase.auth().signInWithRedirect(fbprovider)
       },
       signOut() {
         firebase.auth().signOut()
