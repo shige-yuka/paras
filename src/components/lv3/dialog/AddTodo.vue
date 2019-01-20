@@ -249,11 +249,7 @@ export default Vue.extend({
       return
     }
     this.overview = this.getOverView()
-    if (!this.overview) {
-      return
-    }
-    console.log(this.overview)
-    this.goingRate = this.overview.goingRate
+    this.goingRate = this.overview!.goingRate
   },
   methods: {
     getOverView: function() {
@@ -263,19 +259,12 @@ export default Vue.extend({
       return this.overviews.sort(() => Math.random() - 0.5).shift() || null
     },
     addPlan: async function() {
-      await this.$store.dispatch('ADD_PLAN', {
-        email: '',
-        body: ''
-      })
+      // planの追加処理をする
+      // await this.$store.dispatch('ADD_PLAN', this.overview.plans)
       this.$emit('close')
       return
     }
-  },
-  // computed: {
-  //   overview: function() {
-  //     return this.overviews.sort(() => Math.random() - 0.5).shift()
-  //   }
-  // },
+  }
 })
 </script>
 
