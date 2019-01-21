@@ -8,6 +8,9 @@
     <section :class="$style.recommend">
       <recommend-list-group />
     </section>
+    <section :class="$style.recommend">
+      <recommend-user-group />
+    </section>
     <!-- <unset-todo :class="$style.unset" /> -->
     <v-fab />
     <div :class="$style.walkThrough">
@@ -26,6 +29,7 @@ import AvatarName from '~/components/lv3/AvatarName.vue'
 import CoverImage from '~/components/lv3/CoverImage.vue'
 import UserStatus from '~/components/lv3/UserStatus.vue'
 import RecommendListGroup from '~/components/lv3/RecommendListGroup.vue'
+import RecommendUserGroup from '~/components/lv3/RecommendUserGroup.vue'
 import WalkThrough from '~/components/lv3/dialog/WalkThrough.vue'
 import auth from '@/plugins/auth'
 
@@ -39,6 +43,7 @@ export default Vue.extend({
     CoverImage,
     UserStatus,
     RecommendListGroup,
+    RecommendUserGroup,
     UnsetTodo,
     VButton,
     VFab,
