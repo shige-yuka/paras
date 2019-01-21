@@ -25,7 +25,8 @@ module.exports = {
     { rel: 'icon', href: '/favicon.ico' },
     { rel: 'apple-touch-icon', size: '180x180', href: '/apple-touch-icon-180x180.png' },
     { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons' },
-    { rel: 'stylesheet', href: 'http://fonts.googleapis.com/earlyaccess/notosansjp.css' }
+    { rel: 'stylesheet', href: 'http://fonts.googleapis.com/earlyaccess/notosansjp.css' },
+    { rel: 'stylesheet', href: 'https://use.fontawesome.com/releases/v5.6.1/css/all.css' }
   ],
   css: [
     // プロジェクト内の CSS ファイル

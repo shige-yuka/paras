@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import firebase from '~/plugins/firebase'
 import { firebaseMutations, firebaseAction } from 'vuexfire'
+import '@fortawesome/fontawesome-free/css/all.css'
+
 const db = firebase.database()
 const usersRef = db.ref('/users')
 const provider = new firebase.auth.GoogleAuthProvider()
