@@ -6,6 +6,7 @@ const db = firebase.database()
 const usersRef = db.ref('/users')
 const plansRef = db.ref('/plans')
 const provider = new firebase.auth.GoogleAuthProvider()
+const fbprovider = new firebase.auth.FacebookAuthProvider();
 
 Vue.use(Vuex)
 
