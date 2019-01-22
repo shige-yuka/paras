@@ -16,7 +16,6 @@
 
 <script>
 import Vue from 'vue'
-// import firebase from '@/plugins/firebase'
 import HeroImage from '~/components/lv3/heroimage/Lp.vue'
 import MyPage from '~/components/lv2/MyPage.vue'
 import { mapGetters } from 'vuex'
@@ -34,13 +33,16 @@ export default {
     MyPage
   },
   created: async function() {
-    this.userData = await auth()
-    if (this.userData) {
-      this.$router.push('/user')
+    try {
+      this.userData = await auth()
+      if (this.userData) {
+        this.$store.dispatch('SET_CREDENTIAL', { user: this.userData })
+        this.$router.push('/user')
+      }
+      this.loading=true
+    } catch (e) {
+      console.error(e)
     }
-    firebase.auth().onAuthStateChanged(user =>{
-      this.loading=true;
-    });
   }
 }
 </script>
