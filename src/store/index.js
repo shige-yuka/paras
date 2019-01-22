@@ -4,6 +4,7 @@ import firebase from '~/plugins/firebase'
 import { firebaseMutations, firebaseAction } from 'vuexfire'
 const db = firebase.database()
 const usersRef = db.ref('/users')
+const plansRef = db.ref('/plans')
 const provider = new firebase.auth.GoogleAuthProvider()
 
 Vue.use(Vuex)
@@ -13,11 +14,14 @@ const createStore = () => {
     state: {
       user: null,
       users: [],
+      plans: [],
       isLoaded: false
     },
     getters: {
       users: state => state.users,
+      plans: state => state.plans,
       user: state => state.user,
+      isAuthenticated: state => !!state.user,
       isLoaded: state => state.isLoaded
     },
     mutations: {
@@ -49,8 +53,19 @@ const createStore = () => {
       INIT_USERS: firebaseAction(({ bindFirebaseRef }) => {
         bindFirebaseRef('users', usersRef)
       }),
+      INIT_PLANS: firebaseAction(({ bindFirebaseRef }) => {
+        bindFirebaseRef('plans', plansRef)
+      }),
+      ADD_PLAN: firebaseAction((ctx, { user }) => {
+        db()
+        .ref(`plans/${user.uid}`)
+        .push({
+          from: email,
+          body
+        })
+      }),
       callAuth() {
-        firebase.auth().signInWithRedirect(provider)
+        firebase.auth().signInWithPopup(provider)
       },
       signOut() {
         firebase.auth().signOut()
