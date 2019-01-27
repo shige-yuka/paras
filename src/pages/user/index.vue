@@ -27,13 +27,21 @@ import CoverImage from '~/components/lv3/CoverImage.vue'
 import UserStatus from '~/components/lv3/UserStatus.vue'
 import RecommendListGroup from '~/components/lv3/RecommendListGroup.vue'
 import WalkThrough from '~/components/lv3/dialog/WalkThrough.vue'
+import firebase from '@/plugins/firebase'
 import auth from '@/plugins/auth'
+import { mapGetters, mapActions } from 'vuex'
+
+export interface IData {
+  userData: firebase.User | null
+}
 
 export default Vue.extend({
   layout: 'user',
-  data: () => ({
-    userData: null
-  }),
+  data(): IData {
+    return {
+      userData: null
+    }
+  },
   components: {
     AvatarName,
     CoverImage,
@@ -44,12 +52,24 @@ export default Vue.extend({
     VFab,
     WalkThrough
   },
-  created: async function() {
-    this.userData = await auth()
+  beforeMount: async function() {
+    let user
     if (!this.userData) {
-      this.$router.push('/')
+      user = await auth()
+      if (!user) this.$router.push('/')
     }
-  }
+    await Promise.all([
+      this.user
+        ? Promise.resolve()
+        : this.$store.dispatch('SET_USER', { user: this.userData }),
+      this.plans.length
+        ? Promise.resolve()
+        : this.$store.dispatch('INIT_PLANS', { user: user }),
+    ])
+  },
+  computed: {
+    ...mapGetters(['user', 'plans'])
+  },
 })
 </script>
 

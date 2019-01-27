@@ -11,7 +11,7 @@
         </div>
       </div>
     </article>
-    <p :class="$style.name">Takeshige</p>
+    <p :class="$style.name" v-if="user">{{user.name}}</p>
     <ul :class="$style.statuses">
       <li :class="$style.item" v-for="(s, index) in statuses" :key="index">
         <span :class="$style.label">{{ s.label }}</span>
@@ -25,6 +25,7 @@
 import Vue from 'vue'
 import WantTo from '~/components/lv1/WantTo.vue'
 import VIconPhoto from '~/components/icon/photo.vue'
+import { mapGetters } from 'vuex'
 
 export default Vue.extend({
 
@@ -45,6 +46,9 @@ export default Vue.extend({
     change: function() {
       return false
     }
+  },
+  computed: {
+    ...mapGetters(['user'])
   }
 })
 </script>
