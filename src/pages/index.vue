@@ -34,7 +34,7 @@ export default {
   },
   created: async function() {
     try {
-      this.userData = await auth()
+      this.userData = await auth().user
       if (this.userData) {
         this.$store.dispatch('SET_CREDENTIAL', { user: this.userData })
         this.$router.push('/user')

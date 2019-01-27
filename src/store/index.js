@@ -28,7 +28,6 @@ const createStore = () => {
     mutations: {
       setCredential(state, { user }) {
         state.user = user
-        this.$router.push('/user')
       },
       setIsLoaded(state, next) {
         state.isLoaded = !!next
@@ -39,14 +38,17 @@ const createStore = () => {
       async SET_CREDENTIAL({ commit }, { user }) {
         if (!user) return
         try {
+          const userDetails = {
+            id: user.uid,
+            name: user.displayName,
+            email: user.email,
+            icon: user.photoURL
+          }
           await usersRef
-            .child(user.email.replace('@', '_at_').replace(/\./g, '_dot_'))
-            .set({
-              name: user.displayName,
-              email: user.email,
-              icon: user.photoURL
-            })
-          commit('setCredential', { user })
+            .child(user.uid)
+            .set(userDetails)
+          commit('setCredential', { user: userDetails })
+          this.$router.push('/user')
         } catch (e) {
           if (e.code === 'auth/user-not-found') {
             console.error('User not found')
@@ -71,9 +73,9 @@ const createStore = () => {
           body
         })
       }),
-      async callAuth({ commit }) {
-        const user = await firebase.auth().signInWithPopup(provider).catch((e) => console.error(e))
-        commit('setCredential', { user })
+      async callAuth({ commit, dispatch }) {
+        const res = await firebase.auth().signInWithPopup(provider).catch((e) => console.error(e))
+        await dispatch('SET_CREDENTIAL', { user: res.user })
       },
       signOut() {
         firebase.auth().signOut()
