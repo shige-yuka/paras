@@ -32,6 +32,9 @@ const createStore = () => {
       setIsLoaded(state, next) {
         state.isLoaded = !!next
       },
+      setPlans(state, { plans }) {
+        state.plans = plans
+      },
       ...firebaseMutations
     },
     actions: {
@@ -40,12 +43,17 @@ const createStore = () => {
         await usersRef
           .child(user.email.replace('@', '_at_').replace(/\./g, '_dot_'))
           .set({
+            uid: user.uid,
             name: user.displayName,
             email: user.email,
             icon: user.photoURL
           })
-        console.log(user)
         commit('setCredential', { user })
+      },
+      async SET_USER({ commit }, { user }) {
+        if (!user) return
+        const usersRef = await db.ref(`/users/${user.uid}`).once('value')
+        commit('setCredential', { user: usersRef.val()})
       },
       async INIT_SINGLE({ commit }, { id }) {
         const snapshot = await postsRef.child(id).once('value')
@@ -54,16 +62,16 @@ const createStore = () => {
       INIT_USERS: firebaseAction(({ bindFirebaseRef }) => {
         bindFirebaseRef('users', usersRef)
       }),
-      INIT_PLANS: firebaseAction(({ bindFirebaseRef }) => {
-        bindFirebaseRef('plans', plansRef)
-      }),
-      ADD_PLAN: firebaseAction((ctx, { user }) => {
-        db()
-        .ref(`plans/${user.uid}`)
-        .push({
-          from: email,
-          body
+      async INIT_PLANS({ commit }, { user }) {
+        const snapshot = await db.ref(`/plans/${user.uid}`).once('value')
+        firebaseAction(async ({ bindFirebaseRef }) => {
+          await bindFirebaseRef('plans', plansRef)
         })
+        commit('setPlans', { plans: snapshot.val() })
+      },
+      ADD_PLAN: firebaseAction(async (ctx, { user, plan }) => {
+        const planRef = db.ref(`plans/${user.id}`)
+        await planRef.push(plan)
       }),
       callAuth() {
         firebase.auth().signInWithPopup(provider)
