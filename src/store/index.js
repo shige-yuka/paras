@@ -40,15 +40,23 @@ const createStore = () => {
     actions: {
       async SET_CREDENTIAL({ commit }, { user }) {
         if (!user) return
-        await usersRef
-          .child(user.email.replace('@', '_at_').replace(/\./g, '_dot_'))
-          .set({
-            uid: user.uid,
+        try {
+          const userDetails = {
+            id: user.uid,
             name: user.displayName,
             email: user.email,
             icon: user.photoURL
-          })
-        commit('setCredential', { user })
+          }
+          await usersRef
+            .child(user.uid)
+            .set(userDetails)
+          commit('setCredential', { user: userDetails })
+          this.$router.push('/user')
+        } catch (e) {
+          if (e.code === 'auth/user-not-found') {
+            console.error('User not found')
+          }
+        }
       },
       async SET_USER({ commit }, { user }) {
         if (!user) return
@@ -73,8 +81,9 @@ const createStore = () => {
         const planRef = db.ref(`plans/${user.id}`)
         await planRef.push(plan)
       }),
-      callAuth() {
-        firebase.auth().signInWithPopup(provider)
+      async callAuth({ commit, dispatch }) {
+        const res = await firebase.auth().signInWithPopup(provider).catch((e) => console.error(e))
+        await dispatch('SET_CREDENTIAL', { user: res.user })
       },
       signOut() {
         firebase.auth().signOut()
