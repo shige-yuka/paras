@@ -3,36 +3,36 @@
   <h2 :class="$style.headline">同じカテゴリーにチャレンジ中の人</h2>
   <ul :class="$style.grid">
     <li :class="[$style.item]" v-for="(pItems, index) in plans" :key="index">
-      <v-card>
-        <img :src="pItems.src" :class="$style.img">
-        <img :src="pItems.avatar" :class="$style.avatar">
-        <p :class="$style.username">{{ pItems.username }}</p>
-        <v-card-title primary-title>
-          <div :class="$style.overview">
-            <h3 :class="$style.title">{{ pItems.title }}</h3>
-            <p :class="$style.text">{{ pItems.plan }}にチャレンジ中</p>
-            <v-progress-linear
-              :class="$style.progress"
-              background-color="cyan lighten-4"
-              color="cyan lighten-1"
-              value="30"
-            ></v-progress-linear>
-            <a :href="pItems.URL">
-              <v-icon color="primary" small>fas fa-hands-helping</v-icon>
-              <span :class="$style.count">{{ pItems.supportCount }}</span>
-            </a>
-          </div>
-        </v-card-title>
-        <v-slide-y-transition>
-          <v-card-text v-show="pItems.isShow">
-            <ul>
-              <li v-for="(p, index) in pItems.plans" :key="index">
-                {{ p.plan }}
-              </li>
-            </ul>
-          </v-card-text>
-        </v-slide-y-transition>
-      </v-card>
+      <a :href="pItems.URL">
+        <v-card>
+          <img :src="pItems.src" :class="$style.img">
+          <img :src="pItems.avatar" :class="$style.avatar">
+          <p :class="$style.username">{{ pItems.username }}</p>
+          <v-card-title primary-title>
+            <div :class="$style.overview">
+              <h3 :class="$style.title">{{ pItems.title }}</h3>
+              <p :class="$style.text">{{ pItems.plan }}にチャレンジ中</p>
+              <v-progress-linear
+                :class="$style.progress"
+                background-color="cyan lighten-4"
+                color="cyan lighten-1"
+                value="30"
+              ></v-progress-linear>
+                <v-icon color="primary" small>fas fa-hands-helping</v-icon>
+                <span :class="$style.count">{{ pItems.supportCount }}</span>
+            </div>
+          </v-card-title>
+          <v-slide-y-transition>
+            <v-card-text v-show="pItems.isShow">
+              <ul>
+                <li v-for="(p, index) in pItems.plans" :key="index">
+                  {{ p.plan }}
+                </li>
+              </ul>
+            </v-card-text>
+          </v-slide-y-transition>
+        </v-card>
+      </a>
     </li>
   </ul>
 </div>
@@ -53,7 +53,7 @@
           plan: '食パンのレシピを検索する',
           ratio: 1,
           numerator: 0,
-          URL: '/user/todo',
+          URL: '/plans/aaaaaa',
           supportCount: 12,
           // denominator: plans.length,
         },
@@ -66,7 +66,7 @@
           ratio: 1,
           numerator: 0,
           denominator: 12,
-          URL: '/user/todo',
+          URL: '/plans/bbbbbb',
           supportCount: 12,
         },
         {
@@ -78,7 +78,7 @@
           ratio: 1,
           numerator: 0,
           denominator: 22,
-          URL: '/user/todo',
+          URL: '/plans/cccccc',
           supportCount: 12,
         }
       ],
@@ -178,6 +178,7 @@
   margin-bottom: var(--xnarrow);
 }
 .count {
+  color: var(--primary);
   font-size: .8rem;
 }
 .card {
