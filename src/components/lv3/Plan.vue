@@ -23,6 +23,7 @@
         </v-card-title>
         <v-card-actions>
           <div :class="$style.buttonWrap">
+            <!-- TODO:メッセージが送れるようにしたいです -->
             <v-textarea
               outline
               name="messageform"
@@ -38,6 +39,7 @@
     </li>
   </ul>
   <section :class="$style.comments">
+    <!-- TODO:メッセージ一覧が表示されるようにしたいです -->
     <ul :class="$style.grid">
       <li :class="[$style.item]" v-for="(mItems, index) in messages" :key="index">
         <v-card>
