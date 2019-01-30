@@ -1,38 +1,37 @@
 <template>
-  <ul :class="[$style.grid, $style.cal3]">
+  <ul :class="[$style.grid, $style.cal3]" v-if="plans && Object.keys(plans).length > 0">
     <li :class="[$style.item]" v-for="(pItems, index) in plans" :key="index">
       <v-card>
-        <img :src="pItems.src" :class="$style.img">
+        <img :src="ImgSrc(pItems.title)" :class="$style.img">
         <v-card-title primary-title>
           <div :class="$style.overview">
             <h3 :class="$style.title">{{ pItems.title }}</h3>
             <!-- TODO:そしてチェックする毎によくできましたモーダルを表示したいです(デザインできました) -->
             <!-- TODO:checkが入ると、fadeoutのclassを追加してフワッと消して、次のタスクが表示されるようにしたいです -->
             <v-checkbox
-              v-model="pItems.plans.find(plans => plans.isChecked === false).isChecked"
+              v-model="pItems.plans.find(plans => plans.isCompleted === false).isCompleted"
               :key="index"
-              @click="isCheeringModal = true"
-              :label="getFirstPlans(pItems.plans).plan"
+              @click.native="complete(pItems.plans.find(plans => plans.isCompleted === false), index)"
               :class="$style.todo"
               color="cyan"
             ></v-checkbox>
             <!-- TODO:期限も更新されるようにしたいです…！ -->
-            <p :class="$style.term">期限：{{ getFirstPlans(pItems.plans).year }}{{ getFirstPlans(pItems.plans).day }}</p>
+            <p :class="$style.term">期限：{{ formatDate(getFirstPlans(pItems.plans).day) }}</p>
             <span :class="$style.category">{{ pItems.categoryLv1 }}</span>
             <span :class="$style.category">{{ pItems.categoryLv2 }}</span>
             <v-progress-linear
               :class="$style.progress"
               background-color="cyan lighten-4"
               color="cyan lighten-1"
-              v-model="pItems.plans.filter(plan => plan.isChecked === true).length / pItems.plans.length * 100"
+              v-model="pItems.plans.filter(plan => plan.isCompleted === true).length / pItems.plans.length * 100"
             ></v-progress-linear>
-            <span :class="$style.attainment">{{ pItems.plans.filter(plan => plan.isChecked === true).length }}/{{ pItems.plans.length }}</span>
+            <span :class="$style.attainment">{{ pItems.plans.filter(plan => plan.isCompleted === true).length }}/{{ pItems.plans.length }}</span>
           </div>
         </v-card-title>
 
         <v-card-actions>
           <!-- TODO:削除ボタンで削除、完了ボタンで全完了したいです -->
-          <v-btn flat icon color="primary"><v-icon dark>delete</v-icon></v-btn>
+          <v-btn flat icon @click="deletePlan(index)" color="primary"><v-icon dark>delete</v-icon></v-btn>
           <v-btn flat small color="primary">完了</v-btn>
           <v-spacer></v-spacer>
           <v-btn icon @click="pItems.isShow = !pItems.isShow">
@@ -41,12 +40,12 @@
         </v-card-actions>
 
         <v-slide-y-transition>
-          <v-card-text v-show="pItems.isShow">
+          <v-card-text v-if="pItems.isShow && pItems.plans">
             <ul>
               <li v-for="(p, index) in pItems.plans" :key="index">
                 <v-checkbox
                   @click="isCheeringModal = true"
-                  v-model="p.isChecked"
+                  v-model="p.isCompleted"
                   :label="`${p.day} ${p.plan}`"
                   :class="$style.todo"
                   color="cyan"
@@ -66,6 +65,12 @@
 <script lang="ts">
   import Vue from 'vue'
   import Cheering from '~/components/lv3/dialog/Cheering.vue'
+  import dayjs from 'dayjs'
+  import { mapGetters } from 'vuex'
+  import firebase from '@/plugins/firebase'
+
+  const db = firebase.database()
+
   export default Vue.extend({
     components: {
       Cheering
@@ -73,108 +78,51 @@
     data: () => ({
       isCheeringModal: false,
       show: false,
-      planItems: [
-        {
-          src: require('~/assets/img/img-sample2.png'),
-          title: 'おいしい食パンを焼く',
-          plan: '食パンのレシピを検索する',
-          categoryLv1: '料理',
-          categoryLv2: 'パン',
-          ratio: 1,
-          numerator: 0,
-          // denominator: plans.length,
-          isShow: false,
-          plans: [
-            {year: '2019/', day: '1/11', plan: '食パンのレシピを検索する', isChecked: false},
-            {year: '2019/', day: '1/17', plan: '食パン作りの道具を揃える', isChecked: false},
-            {year: '2019/', day: '1/17', plan: '食パン作りの材料を揃える', isChecked: false},
-            {year: '2019/', day: '1/18', plan: 'プレーンな食パンを焼く', isChecked: false},
-            {year: '2019/', day: '1/24', plan: 'くるみ食パンの材料を追加購入する', isChecked: false},
-            {year: '2019/', day: '1/25', plan: 'くるみ食パンを焼く', isChecked: false},
-            {year: '2019/', day: '1/31', plan: 'ドライフルーツ食パンの材料を追加購入する', isChecked: false},
-            {year: '2019/', day: '2/1', plan: 'ドライフルーツ食パンを焼く', isChecked: false},
-            {year: '2019/', day: '2/7', plan: 'チョコマーブル食パンの材料を追加購入する', isChecked: false},
-            {year: '2019/', day: '2/8', plan: 'チョコマーブル食パンを焼く', isChecked: false},
-            {year: '2019/', day: '2/14', plan: '自信がある食パンの材料を追加購入する', isChecked: false},
-            {year: '2019/', day: '2/15', plan: '自信がある食パンを焼く', isChecked: false},
-            {year: '2019/', day: '2/15', plan: '焼いた食パンを誰かにふるまい「おいしい」と言ってもらう', isChecked: false}
-          ]
-        },
-        {
-          src: require('~/assets/img/img-sample4.png'),
-          title: 'スカイダイビングをする',
-          plan: 'スカイダイビングで検索',
-          categoryLv1: 'レジャー・スポーツ',
-          categoryLv2: '空',
-          ratio: 1,
-          numerator: 0,
-          denominator: 12,
-          isShow: false,
-          plans: [
-            {year: '2019/', day: '1/11', plan: 'スカイダイビングで検索', isChecked: false},
-            {year: '2019/', day: '1/11', plan: '年齢、身長、体重、健康状態が制限に引っかからないか念入りに調べる', isChecked: false},
-            {year: '2019/', day: '1/11', plan: 'スカイダイビング貯金を始める', isChecked: false},
-            {year: '2019/', day: '1/11', plan: 'スカイダイビングができる体重に調整し始める', isChecked: false},
-            {year: '2019/', day: '1/17', plan: '貯金と体重調整の目処が立ったら、休みを調整してスカイダイビングの予約を取る(撮影サービスも予約するのがおすすめ)', isChecked: false},
-            {year: '2019/', day: '1/18', plan: '海外でスカイダイビングする場合はパスポートを準備する', isChecked: false},
-            {year: '2019/', day: '1/18', plan: '体重を確認する', isChecked: false},
-            {year: '2019/', day: '1/25', plan: '再度体重を確認する', isChecked: false},
-            {year: '2019/', day: '2/1', plan: '再々度体重を確認する', isChecked: false},
-            {year: '2019/', day: '2/8', plan: 'スカイダイビングに適した動きやすい服と靴を揃える', isChecked: false},
-            {year: '2019/', day: '2/15', plan: 'スカイダイビングに挑む', isChecked: false},
-            {year: '2019/', day: '2/15', plan: 'スカイダイビングの思い出を記録に残す', isChecked: false},
-          ]
-        },
-        {
-          src: require('~/assets/img/img-sample3.png'),
-          title: 'プランターでブルーベリーを育てる',
-          plan: 'ブルーベリー 育て方 で検索',
-          categoryLv1: '園芸',
-          categoryLv2: 'フルーツ',
-          ratio: 1,
-          numerator: 0,
-          denominator: 22,
-          isShow: false,
-          plans: [
-            {year: '2019/', day: '1/11', plan: 'ブルーベリー 育て方 で検索', isChecked: false},
-            {year: '2019/', day: '1/18', plan: '毎日可愛がる決意をする', isChecked: false},
-            {year: '2019/', day: '1/18', plan: '育てる地域に適した品種で、同系統で別品種、開花時期が同時期の2年生苗を2本以上購入', isChecked: false},
-            {year: '2019/', day: '1/18', plan: 'ブルーベリー作りに必要な道具を揃える(剪定バサミ、バケツなど)', isChecked: false},
-            {year: '2019/', day: '1/18', plan: 'ブルーベリー作りに必要な土と肥料を揃える(未調整のピートモスなど)', isChecked: false},
-            {year: '2019/', day: '1/18', plan: '土を作る', isChecked: false},
-            {year: '2019/', day: '1/18', plan: 'ブルーベリーを植える', isChecked: false},
-            {year: '2019/', day: '1/19', plan: '土の表面が乾いたら水やりをする', isChecked: false},
-            {year: '2019/', day: '3/1', plan: '暖かくなって来たら水やりの頻度を見直す(増やす)', isChecked: false},
-            {year: '2019/', day: '3/8', plan: '春肥を与える', isChecked: false},
-            {year: '2019/', day: '4/1', plan: '開花を見守る', isChecked: false},
-            {year: '2019/', day: '4/1', plan: '虫での受粉が難しい場合は人工授粉を検討する', isChecked: false},
-            {year: '2019/', day: '4/1', plan: '鳥から花と実を守るために鳥よけグッズを購入する', isChecked: false},
-            {year: '2019/', day: '5/1', plan: '夏肥を与える', isChecked: false},
-            {year: '2019/', day: '6/1', plan: '実がつくのを見守る', isChecked: false},
-            {year: '2019/', day: '7/1', plan: '青くなって数日経過し、熟した実を一つずつ収穫する', isChecked: false},
-            {year: '2019/', day: '8/1', plan: '引き続き熟した実を一つずつ収穫する', isChecked: false},
-            {year: '2019/', day: '9/1', plan: 'すべての実を収穫し終えたら礼肥を与える', isChecked: false},
-            {year: '2019/', day: '10/1', plan: '寒くなって来たら水やりの頻度を見直す(減らす)', isChecked: false},
-            {year: '2019/', day: '11/1', plan: '落葉したら、必要に応じて枝を剪定する(枝が少ない場合は不要)', isChecked: false},
-            {year: '2019/', day: '11/1', plan: '枝が大きくなっていたら大きな鉢に植え替える', isChecked: false},
-            {year: '2019/', day: '12/1', plan: '冬場も毎日可愛がる', isChecked: false},
-          ]
-        }
-      ],
     }),
+    mounted() {
+      console.log(this.plans)
+    },
     methods: {
-      success: function() {
-        console.log('success!!!!!!!!!!')
+      complete: async function(plan: any, i: number) {
+        plan.isCompleted = true
+        this.isCheeringModal = true
+        const index = this.plans[i].plans.findIndex((p: any) => p.plan === plan.plan)
+        const p = this.plans[i].plans.filter((p: any) => p.title === plan.plan)
+        p.isCompleted = true
+        const updates: any = {}
+        updates[`/plans/${this.user.uid}/${i}/plans/${index}`] = p
+        db.ref().update(updates)
+        console.log(`/plans/${this.user.uid}/${i}/plans/${index}`)
+      },
+      deletePlan: async function(i: string) {
+        db.ref(`/plans/${this.user.uid}`).child(i).remove()
+        await this.$store.dispatch('INIT_PLANS', { user: this.user })
       },
       getFirstPlans: function(array: any[]) {
-        return array.find(plans => plans.isChecked === false)
+        return array.find(plans => plans.isCompleted === false)
+      },
+      formatDate: function(date: string) {
+        return dayjs(date).format('YYYY/MM/DD')
+      },
+      ImgSrc: function(title: string) {
+        let img: any
+        switch (title) {
+          case 'おいしい食パンを焼く':
+            img = require('~/assets/img/img-sample2.png')
+            break
+          case 'スカイダイビングをする':
+            img = require('~/assets/img/img-sample4.png')
+            break
+          default:
+            img = require('~/assets/img/img-sample3.png')
+            break
+        }
+        return img
       }
     },
     computed: {
-      plans: function () {
-        return this.planItems
-      }
-    }
+      ...mapGetters(['plans', 'user']),
+    },
   })
 </script>
 

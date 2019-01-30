@@ -32,6 +32,9 @@ const createStore = () => {
       setIsLoaded(state, next) {
         state.isLoaded = !!next
       },
+      setPlans(state, { plans }) {
+        state.plans = plans
+      },
       ...firebaseMutations
     },
     actions: {
@@ -39,7 +42,7 @@ const createStore = () => {
         if (!user) return
         try {
           const userDetails = {
-            id: user.uid,
+            uid: user.uid,
             name: user.displayName,
             email: user.email,
             icon: user.photoURL
@@ -55,23 +58,24 @@ const createStore = () => {
           }
         }
       },
-      async INIT_SINGLE({ commit }, { id }) {
-        const snapshot = await postsRef.child(id).once('value')
-        commit('savePost', { post: snapshot.val() })
+      async SET_USER({ commit }, { user }) {
+        if (!user) return
+        const usersRef = await db.ref(`/users/${user.uid}`).once('value')
+        commit('setCredential', { user: usersRef.val()})
       },
       INIT_USERS: firebaseAction(({ bindFirebaseRef }) => {
         bindFirebaseRef('users', usersRef)
       }),
-      INIT_PLANS: firebaseAction(({ bindFirebaseRef }) => {
-        bindFirebaseRef('plans', plansRef)
-      }),
-      ADD_PLAN: firebaseAction((ctx, { user }) => {
-        db()
-        .ref(`plans/${user.uid}`)
-        .push({
-          from: email,
-          body
+      async INIT_PLANS({ commit }, { user }) {
+        const snapshot = await db.ref(`/plans/${user.uid}`).once('value')
+        firebaseAction(async ({ bindFirebaseRef }) => {
+          await bindFirebaseRef('plans', plansRef)
         })
+        commit('setPlans', { plans: snapshot.val() })
+      },
+      ADD_PLAN: firebaseAction(async (ctx, { user, plan }) => {
+        const planRef = db.ref(`plans/${user.uid}`)
+        await planRef.push(plan)
       }),
       async callAuth({ commit, dispatch }) {
         const res = await firebase.auth().signInWithPopup(provider).catch((e) => console.error(e))
