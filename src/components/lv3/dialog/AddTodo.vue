@@ -136,6 +136,7 @@ export interface IOverview {
   categoryLv2: string;
   budget: string;
   goingRate: string;
+  isShow: boolean
   plans: {
       startDay: any;
       day: string;
@@ -170,6 +171,7 @@ export default Vue.extend({
           categoryLv2: 'パン',
           budget: '￥10,000',
           goingRate: '予算相場：￥5,000〜￥60,000',
+          isShow: false,
           plans: [
             {startDay: 1, day: '1/11', plan: '食パンのレシピを検索する'},
             {startDay: 7, day: '1/17', plan: '食パン作りの道具を揃える'},
@@ -192,6 +194,7 @@ export default Vue.extend({
           categoryLv2: '空',
           budget: '￥75,000',
           goingRate: '予算相場：￥40,000〜￥110,000',
+          isShow: false,
           plans: [
             {startDay: 1, day: '1/11', plan: 'スカイダイビングで検索'},
             {startDay: 1, day: '1/11', plan: '年齢、身長、体重、健康状態が制限に引っかからないか念入りに調べる'},
@@ -213,6 +216,7 @@ export default Vue.extend({
           categoryLv2: 'フルーツ',
           budget: '￥14,000',
           goingRate: '予算相場：￥8,000〜￥20,000',
+          isShow: false,
           plans: [
             {startDay: 1, day: '1/11', plan: 'ブルーベリー 育て方 で検索'},
             {startDay: 8, day: '1/18', plan: '毎日可愛がる決意をする'},
@@ -277,6 +281,7 @@ export default Vue.extend({
       })
       // planの追加処理をする
       await this.$store.dispatch('ADD_PLAN', { user: this.$store.getters.user, plan: overview})
+      await this.$store.dispatch('INIT_PLANS', { user: this.$store.getters.user })
       this.$emit('close')
       return
     }
