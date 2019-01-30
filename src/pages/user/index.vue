@@ -10,7 +10,7 @@
     </section>
     <!-- <unset-todo :class="$style.unset" /> -->
     <v-fab />
-    <div :class="$style.walkThrough">
+    <div v-if="isShowWalkThrogh" :class="$style.walkThrough">
       <walk-through />
     </div>
   </article>
@@ -32,14 +32,14 @@ import auth from '@/plugins/auth'
 import { mapGetters, mapActions } from 'vuex'
 
 export interface IData {
-  userData: firebase.User | null
+  isShowWalkThrogh: boolean
 }
 
 export default Vue.extend({
   layout: 'user',
   data(): IData {
     return {
-      userData: null
+      isShowWalkThrogh: false
     }
   },
   components: {
@@ -52,20 +52,23 @@ export default Vue.extend({
     VFab,
     WalkThrough
   },
-  beforeMount: async function() {
+  mounted: async function() {
     let user
-    if (!this.userData) {
+    if (!this.user) {
       user = await auth()
       if (!user) this.$router.push('/')
     }
     await Promise.all([
       this.user
         ? Promise.resolve()
-        : this.$store.dispatch('SET_USER', { user: this.userData }),
+        : this.$store.dispatch('SET_CREDENTIAL', { user: user || null }),
       this.plans.length
         ? Promise.resolve()
-        : this.$store.dispatch('INIT_PLANS', { user: user }),
+        : this.$store.dispatch('INIT_PLANS', { user: user || this.user }),
     ])
+    if (!this.plans || this.plans.length === 0) {
+      this.isShowWalkThrogh = true
+    }
   },
   computed: {
     ...mapGetters(['user', 'plans'])
