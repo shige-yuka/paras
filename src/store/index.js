@@ -42,7 +42,7 @@ const createStore = () => {
         if (!user) return
         try {
           const userDetails = {
-            id: user.uid,
+            uid: user.uid,
             name: user.displayName,
             email: user.email,
             icon: user.photoURL
@@ -63,10 +63,6 @@ const createStore = () => {
         const usersRef = await db.ref(`/users/${user.uid}`).once('value')
         commit('setCredential', { user: usersRef.val()})
       },
-      async INIT_SINGLE({ commit }, { id }) {
-        const snapshot = await postsRef.child(id).once('value')
-        commit('savePost', { post: snapshot.val() })
-      },
       INIT_USERS: firebaseAction(({ bindFirebaseRef }) => {
         bindFirebaseRef('users', usersRef)
       }),
@@ -78,7 +74,7 @@ const createStore = () => {
         commit('setPlans', { plans: snapshot.val() })
       },
       ADD_PLAN: firebaseAction(async (ctx, { user, plan }) => {
-        const planRef = db.ref(`plans/${user.id}`)
+        const planRef = db.ref(`plans/${user.uid}`)
         await planRef.push(plan)
       }),
       async callAuth({ commit, dispatch }) {
