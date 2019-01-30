@@ -95,7 +95,6 @@
         console.log(`/plans/${this.user.uid}/${i}/plans/${index}`)
       },
       deletePlan: async function(i: string) {
-        console.log(this.user)
         db.ref(`/plans/${this.user.uid}`).child(i).remove()
         await this.$store.dispatch('INIT_PLANS', { user: this.user })
       },
