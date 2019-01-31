@@ -16,9 +16,9 @@
               :class="$style.progress"
               background-color="cyan lighten-4"
               color="cyan lighten-1"
-              v-model="pItems.plans.filter(plan => plan.isChecked === true).length / pItems.plans.length * 100"
+              v-model="pItems.plans.filter(plan => plan.isCompleted === true).length / pItems.plans.length * 100"
             ></v-progress-linear>
-            <span :class="$style.attainment">{{ pItems.plans.filter(plan => plan.isChecked === true).length }}/{{ pItems.plans.length }}</span>
+            <span :class="$style.attainment">{{ pItems.plans.filter(plan => plan.isCompleted === true).length }}/{{ pItems.plans.length }}</span>
           </div>
         </v-card-title>
         <v-card-actions>
@@ -28,11 +28,12 @@
               outline
               name="messageform"
               label="message"
+              v-model="message"
               placeholder="応援メッセージや支援コメントで達成のお手伝いをしましょう！"
             ></v-textarea>
             <v-icon color="primary" small>fas fa-hands-helping</v-icon>
             <span :class="$style.count">{{ pItems.supportCount }}</span>
-            <v-btn small color="primary">送信</v-btn>
+            <v-btn small color="primary" @click="submit(index)">送信</v-btn>
           </div>
         </v-card-actions>
       </v-card>
@@ -47,7 +48,7 @@
             <img :src="mItems.avatar" :class="$style.avatar">
             <p :class="$style.username">{{ mItems.username }}</p>
             <div :class="$style.overview">
-              <p>{{ mItems.text }}</p>
+              <p>{{ mItems.message }}</p>
             </div>
           </v-card-title>
         </v-card>
@@ -60,10 +61,12 @@
 
 <script lang="ts">
   import Vue from 'vue'
+  import { mapGetters } from 'vuex'
   export default Vue.extend({
     components: {
     },
     data: () => ({
+      message: '',
       planItems: [
         {
           avatar: require('~/assets/img/avatar01.png'),
@@ -78,19 +81,19 @@
           // denominator: plans.length,
           isShow: false,
           plans: [
-            {year: '2019/', day: '1/11', plan: '食パンのレシピを検索する', isChecked: false},
-            {year: '2019/', day: '1/17', plan: '食パン作りの道具を揃える', isChecked: false},
-            {year: '2019/', day: '1/17', plan: '食パン作りの材料を揃える', isChecked: false},
-            {year: '2019/', day: '1/18', plan: 'プレーンな食パンを焼く', isChecked: false},
-            {year: '2019/', day: '1/24', plan: 'くるみ食パンの材料を追加購入する', isChecked: false},
-            {year: '2019/', day: '1/25', plan: 'くるみ食パンを焼く', isChecked: false},
-            {year: '2019/', day: '1/31', plan: 'ドライフルーツ食パンの材料を追加購入する', isChecked: false},
-            {year: '2019/', day: '2/1', plan: 'ドライフルーツ食パンを焼く', isChecked: false},
-            {year: '2019/', day: '2/7', plan: 'チョコマーブル食パンの材料を追加購入する', isChecked: false},
-            {year: '2019/', day: '2/8', plan: 'チョコマーブル食パンを焼く', isChecked: false},
-            {year: '2019/', day: '2/14', plan: '自信がある食パンの材料を追加購入する', isChecked: false},
-            {year: '2019/', day: '2/15', plan: '自信がある食パンを焼く', isChecked: false},
-            {year: '2019/', day: '2/15', plan: '焼いた食パンを誰かにふるまい「おいしい」と言ってもらう', isChecked: false}
+            {year: '2019/', day: '1/11', plan: '食パンのレシピを検索する', isCompleted: false},
+            {year: '2019/', day: '1/17', plan: '食パン作りの道具を揃える', isCompleted: false},
+            {year: '2019/', day: '1/17', plan: '食パン作りの材料を揃える', isCompleted: false},
+            {year: '2019/', day: '1/18', plan: 'プレーンな食パンを焼く', isCompleted: false},
+            {year: '2019/', day: '1/24', plan: 'くるみ食パンの材料を追加購入する', isCompleted: false},
+            {year: '2019/', day: '1/25', plan: 'くるみ食パンを焼く', isCompleted: false},
+            {year: '2019/', day: '1/31', plan: 'ドライフルーツ食パンの材料を追加購入する', isCompleted: false},
+            {year: '2019/', day: '2/1', plan: 'ドライフルーツ食パンを焼く', isCompleted: false},
+            {year: '2019/', day: '2/7', plan: 'チョコマーブル食パンの材料を追加購入する', isCompleted: false},
+            {year: '2019/', day: '2/8', plan: 'チョコマーブル食パンを焼く', isCompleted: false},
+            {year: '2019/', day: '2/14', plan: '自信がある食パンの材料を追加購入する', isCompleted: false},
+            {year: '2019/', day: '2/15', plan: '自信がある食パンを焼く', isCompleted: false},
+            {year: '2019/', day: '2/15', plan: '焼いた食パンを誰かにふるまい「おいしい」と言ってもらう', isCompleted: false}
           ]
         }
       ],
@@ -98,21 +101,33 @@
         {
         avatar: require('~/assets/img/avatar02.png'),
         username: 'Hanako',
-        text: 'パンの気泡が大きくなる場合は焼く前のガス抜きを丁寧にやると良いです！',
+        message: 'パンの気泡が大きくなる場合は焼く前のガス抜きを丁寧にやると良いです！',
         },
         {
         avatar: require('~/assets/img/avatar03.png'),
         username: 'Taro',
-        text: '元も子もないかもしれませんが、ホームベーカリーを使うと本当に美味しいパンが焼けます。',
+        message: '元も子もないかもしれませんが、ホームベーカリーを使うと本当に美味しいパンが焼けます。',
         }
       ]
     }),
     methods: {
+      submit: function(index: string) {
+        const icon: string = this.$store.getters.user.icon
+        const username: string = this.$store.getters.user.name
+        const message = this.message
+        const item = {
+          avatar: icon,
+          username: username,
+          message: this.message
+        }
+        this.messageItems.push(item)
+        this.message = ''
+      },
       success: function() {
         console.log('success!!!!!!!!!!')
       },
       getFirstPlans: function(array: any[]) {
-        return array.find(plans => plans.isChecked === false)
+        return array.find(plans => plans.isCompleted === false)
       }
     },
     computed: {
@@ -122,6 +137,7 @@
       messages: function () {
         return this.messageItems
       },
+      ...mapGetters(['user', 'plans'])
     }
   })
 </script>
