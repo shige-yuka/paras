@@ -77,8 +77,14 @@ const createStore = () => {
         const planRef = db.ref(`plans/${user.uid}`)
         await planRef.push(plan)
       }),
-      async callAuth({ commit, dispatch }) {
-        const res = await firebase.auth().signInWithPopup(provider).catch((e) => console.error(e))
+      async callAuth({ dispatch }, { providerName }) {
+        let res
+        if (providerName === 'facebook') {
+          fbprovider.addScope('user_birthday')
+          res = await firebase.auth().signInWithPopup(fbprovider).catch((e) => console.error(e))
+        } else {
+          res = await firebase.auth().signInWithPopup(provider).catch((e) => console.error(e))
+        }
         await dispatch('SET_CREDENTIAL', { user: res.user })
       },
       signOut() {
