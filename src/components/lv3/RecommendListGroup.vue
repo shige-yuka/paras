@@ -14,6 +14,7 @@
               @click.native="complete(pItems.plans.find(plans => plans.isCompleted === false), index)"
               :class="$style.todo"
               color="cyan"
+              :label="getFirstPlans(pItems.plans).plan"
             ></v-checkbox>
             <!-- TODO:期限も更新されるようにしたいです…！ -->
             <p :class="$style.term">期限：{{ formatDate(getFirstPlans(pItems.plans).day) }}</p>
