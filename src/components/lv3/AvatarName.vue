@@ -2,13 +2,7 @@
   <div :class="$style.target">
     <article>
       <div id="avatarWrap" :class="$style.avatarWrap">
-        <label for="avatar" :class="$style.avatarNoImage">
-          <v-icon-photo :class="$style.avatar" />
-          <input :class="$style.uploadButton" id="avatar" type="file" @change="change">
-        </label>
-        <div v-if="avatar">
-          <img :src="avatar" :class="$style.avatarImage">
-        </div>
+        <img :src="`${user.icon}`" :class="$style.avatarImage">
       </div>
     </article>
     <p :class="$style.name" v-if="user">{{user.name}}</p>
@@ -72,6 +66,7 @@ export default Vue.extend({
 }
 .name {
   width: 100%;
+  margin-top: var(--narrow);
   padding: var(--xnarrow) 0;
   font-size: 1rem;
   text-align: center;
