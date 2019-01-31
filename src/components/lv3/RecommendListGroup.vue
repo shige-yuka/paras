@@ -58,7 +58,7 @@
       </v-card>
     </li>
     <v-dialog v-model="isCheeringModal" max-width="300px">
-      <cheering @close="isCheeringModal=false" />
+      <cheering v-if="isCheeringModal" @close="isCheeringModal=false" />
     </v-dialog>
   </ul>
 </template>
