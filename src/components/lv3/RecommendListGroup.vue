@@ -58,7 +58,7 @@
       </v-card>
     </li>
     <v-dialog v-model="isCheeringModal" max-width="300px">
-      <cheering @close="isCheeringModal=false" />
+      <cheering v-if="isCheeringModal" @close="isCheeringModal=false" />
     </v-dialog>
   </ul>
 </template>
@@ -90,10 +90,10 @@
         const index = this.plans[i].plans.findIndex((p: any) => p.plan === plan.plan)
         const p = this.plans[i].plans.filter((p: any) => p.title === plan.plan)
         p.isCompleted = true
-        const updates: any = {}
-        updates[`/plans/${this.user.uid}/${i}/plans/${index}`] = p
-        db.ref().update(updates)
-        console.log(`/plans/${this.user.uid}/${i}/plans/${index}`)
+        // const updates: any = {}
+        // updates[`/plans/${this.user.uid}/${i}/plans/${index}`] = p
+        // db.ref().update(updates)
+        // console.log(`/plans/${this.user.uid}/${i}/plans/${index}`)
       },
       deletePlan: async function(i: string) {
         db.ref(`/plans/${this.user.uid}`).child(i).remove()
