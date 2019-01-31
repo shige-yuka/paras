@@ -2,7 +2,13 @@
   <div :class="$style.target">
     <article>
       <div id="avatarWrap" :class="$style.avatarWrap">
-        <img :src="`${user.icon}`" :class="$style.avatarImage">
+        <!-- <label for="avatar" :class="$style.avatarNoImage">
+          <v-icon-photo :class="$style.avatar" />	
+          <input :class="$style.uploadButton" id="avatar" type="file" @change="change">	
+        </label>	 -->
+        <div v-if="user">	
+          <img :src="`${user.icon}`" :class="$style.avatarImage">	
+        </div>
       </div>
     </article>
     <p :class="$style.name" v-if="user">{{user.name}}</p>
