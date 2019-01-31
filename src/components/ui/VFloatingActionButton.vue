@@ -4,9 +4,11 @@
       <v-icon dark>add</v-icon>
     </v-btn>
     <v-layout row justify-center>
+      <no-ssr>
       <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
         <add-todo-dialog @close="dialog=false" :class="$style.dialog" />
       </v-dialog>
+      </no-ssr>
     </v-layout>
   </div>
 </template>

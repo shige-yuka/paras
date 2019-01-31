@@ -10,7 +10,7 @@
     </section>
     <!-- <unset-todo :class="$style.unset" /> -->
     <v-fab />
-    <div :class="$style.walkThrough">
+    <div v-if="isShowWalkThrogh" :class="$style.walkThrough">
       <walk-through />
     </div>
   </article>
@@ -27,13 +27,21 @@ import CoverImage from '~/components/lv3/CoverImage.vue'
 import UserStatus from '~/components/lv3/UserStatus.vue'
 import RecommendListGroup from '~/components/lv3/RecommendListGroup.vue'
 import WalkThrough from '~/components/lv3/dialog/WalkThrough.vue'
+import firebase from '@/plugins/firebase'
 import auth from '@/plugins/auth'
+import { mapGetters, mapActions } from 'vuex'
+
+export interface IData {
+  isShowWalkThrogh: boolean
+}
 
 export default Vue.extend({
   layout: 'user',
-  data: () => ({
-    userData: null
-  }),
+  data(): IData {
+    return {
+      isShowWalkThrogh: false
+    }
+  },
   components: {
     AvatarName,
     CoverImage,
@@ -44,12 +52,27 @@ export default Vue.extend({
     VFab,
     WalkThrough
   },
-  created: async function() {
-    this.userData = await auth()
-    if (!this.userData) {
-      this.$router.push('/')
+  mounted: async function() {
+    let user
+    if (!this.user) {
+      user = await auth()
+      if (!user) this.$router.push('/')
     }
-  }
+    await Promise.all([
+      this.user
+        ? Promise.resolve()
+        : this.$store.dispatch('SET_CREDENTIAL', { user: user || null }),
+      this.plans.length
+        ? Promise.resolve()
+        : this.$store.dispatch('INIT_PLANS', { user: user || this.user }),
+    ])
+    if (!this.plans || this.plans.length === 0) {
+      this.isShowWalkThrogh = true
+    }
+  },
+  computed: {
+    ...mapGetters(['user', 'plans'])
+  },
 })
 </script>
 

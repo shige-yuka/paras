@@ -1,6 +1,8 @@
 <template>
   <article>
     <hero-image />
+    <the-top-content01 />
+    <the-top-content02 />
     <div v-if="!loading" :class="$style.loading">
       <div>
         <p :class="$style.text">Loading...</p>
@@ -16,8 +18,9 @@
 
 <script>
 import Vue from 'vue'
-// import firebase from '@/plugins/firebase'
 import HeroImage from '~/components/lv3/heroimage/Lp.vue'
+import TheTopContent01 from '~/components/TheTopContent01.vue'
+import TheTopContent02 from '~/components/TheTopContent02.vue'
 import MyPage from '~/components/lv2/MyPage.vue'
 import { mapGetters } from 'vuex'
 import firebase from '@/plugins/firebase'
@@ -30,17 +33,22 @@ export default {
     loading: false,
   }),
   components: {
+    TheTopContent01,
+    TheTopContent02,
     HeroImage,
     MyPage
   },
   created: async function() {
-    this.userData = await auth()
-    if (this.userData) {
-      this.$router.push('/user')
+    try {
+      this.userData = await auth().user
+      if (this.userData) {
+        this.$store.dispatch('SET_CREDENTIAL', { user: this.userData })
+        this.$router.push('/user')
+      }
+      this.loading=true
+    } catch (e) {
+      console.error(e)
     }
-    firebase.auth().onAuthStateChanged(user =>{
-      this.loading=true;
-    });
   }
 }
 </script>

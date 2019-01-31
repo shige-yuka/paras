@@ -2,16 +2,10 @@
   <div :class="$style.target">
     <article>
       <div id="avatarWrap" :class="$style.avatarWrap">
-        <label for="avatar" :class="$style.avatarNoImage">
-          <v-icon-photo :class="$style.avatar" />
-          <input :class="$style.uploadButton" id="avatar" type="file" @change="change">
-        </label>
-        <div v-if="avatar">
-          <img :src="avatar" :class="$style.avatarImage">
-        </div>
+        <img :src="`${user.icon}`" :class="$style.avatarImage">
       </div>
     </article>
-    <p :class="$style.name">Takeshige</p>
+    <p :class="$style.name" v-if="user">{{user.name}}</p>
     <ul :class="$style.statuses">
       <li :class="$style.item" v-for="(s, index) in statuses" :key="index">
         <span :class="$style.label">{{ s.label }}</span>
@@ -25,6 +19,7 @@
 import Vue from 'vue'
 import WantTo from '~/components/lv1/WantTo.vue'
 import VIconPhoto from '~/components/icon/photo.vue'
+import { mapGetters } from 'vuex'
 
 export default Vue.extend({
 
@@ -45,6 +40,9 @@ export default Vue.extend({
     change: function() {
       return false
     }
+  },
+  computed: {
+    ...mapGetters(['user'])
   }
 })
 </script>
@@ -68,6 +66,7 @@ export default Vue.extend({
 }
 .name {
   width: 100%;
+  margin-top: var(--narrow);
   padding: var(--xnarrow) 0;
   font-size: 1rem;
   text-align: center;
