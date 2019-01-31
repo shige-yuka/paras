@@ -18,6 +18,7 @@ import CoverImage from '~/components/lv3/CoverImage.vue'
 import UserStatus from '~/components/lv3/UserStatus.vue'
 import Plan from '~/components/lv3/Plan.vue'
 import auth from '@/plugins/auth'
+import { mapGetters, mapActions } from 'vuex'
 
 export default Vue.extend({
   layout: 'user',
@@ -35,6 +36,24 @@ export default Vue.extend({
     if (!this.userData) {
       this.$router.push('/')
     }
+  },
+  mounted: async function() {
+    let user
+    if (!this.user) {
+      user = await auth()
+      if (!user) this.$router.push('/')
+    }
+    await Promise.all([
+      this.user
+        ? Promise.resolve()
+        : this.$store.dispatch('SET_CREDENTIAL', { user: user || null }),
+      this.plans.length
+        ? Promise.resolve()
+        : this.$store.dispatch('INIT_PLANS', { user: user || this.user }),
+    ])
+  },
+  computed: {
+    ...mapGetters(['user', 'plans'])
   }
 })
 </script>
