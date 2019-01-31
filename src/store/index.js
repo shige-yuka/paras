@@ -53,7 +53,7 @@ const createStore = () => {
             .child(user.uid)
             .set(userDetails)
           commit('setCredential', { user: userDetails })
-          this.$router.push('/user')
+          // this.$router.push('/user')
         } catch (e) {
           if (e.code === 'auth/user-not-found') {
             console.error('User not found')

@@ -2,7 +2,7 @@
 <div>
   <h2 :class="$style.headline">同じカテゴリーにチャレンジ中の人</h2>
   <ul :class="$style.grid">
-    <li :class="[$style.item]" v-for="(pItems, index) in plans" :key="index">
+    <li :class="[$style.item]" v-for="(pItems, index) in planItems" :key="index">
       <a :href="pItems.URL">
         <v-card>
           <img :src="pItems.src" :class="$style.img">
@@ -53,7 +53,7 @@
           plan: '食パンのレシピを検索する',
           ratio: 1,
           numerator: 0,
-          URL: '/plans/aaaaaa',
+          URL: '/plans/takeshige',
           supportCount: 12,
           // denominator: plans.length,
         },
@@ -66,7 +66,7 @@
           ratio: 1,
           numerator: 0,
           denominator: 12,
-          URL: '/plans/bbbbbb',
+          URL: '/plans/hanako',
           supportCount: 12,
         },
         {
@@ -78,21 +78,11 @@
           ratio: 1,
           numerator: 0,
           denominator: 22,
-          URL: '/plans/cccccc',
+          URL: '/plans/taro',
           supportCount: 12,
         }
       ],
-    }),
-    methods: {
-      success: function() {
-        console.log('success!!!!!!!!!!')
-      },
-    },
-    computed: {
-      plans: function () {
-        return this.planItems
-      }
-    }
+    })
   })
 </script>
 
