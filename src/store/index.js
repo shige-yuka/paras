@@ -34,41 +34,60 @@ const createStore = () => {
       setIsLoaded(state, next) {
         state.isLoaded = !!next
       },
+      setPlans(state, { plans }) {
+        state.plans = plans
+      },
       ...firebaseMutations
     },
     actions: {
       async SET_CREDENTIAL({ commit }, { user }) {
         if (!user) return
-        await usersRef
-          .child(user.email.replace('@', '_at_').replace(/\./g, '_dot_'))
-          .set({
+        try {
+          const userDetails = {
+            uid: user.uid,
             name: user.displayName,
             email: user.email,
             icon: user.photoURL
-          })
-        console.log(user)
-        commit('setCredential', { user })
+          }
+          await usersRef
+            .child(user.uid)
+            .set(userDetails)
+          commit('setCredential', { user: userDetails })
+          this.$router.push('/user')
+        } catch (e) {
+          if (e.code === 'auth/user-not-found') {
+            console.error('User not found')
+          }
+        }
       },
-      async INIT_SINGLE({ commit }, { id }) {
-        const snapshot = await postsRef.child(id).once('value')
-        commit('savePost', { post: snapshot.val() })
+      async SET_USER({ commit }, { user }) {
+        if (!user) return
+        const usersRef = await db.ref(`/users/${user.uid}`).once('value')
+        commit('setCredential', { user: usersRef.val()})
       },
       INIT_USERS: firebaseAction(({ bindFirebaseRef }) => {
         bindFirebaseRef('users', usersRef)
       }),
-      INIT_PLANS: firebaseAction(({ bindFirebaseRef }) => {
-        bindFirebaseRef('plans', plansRef)
-      }),
-      ADD_PLAN: firebaseAction((ctx, { user }) => {
-        db()
-        .ref(`plans/${user.uid}`)
-        .push({
-          from: email,
-          body
+      async INIT_PLANS({ commit }, { user }) {
+        const snapshot = await db.ref(`/plans/${user.uid}`).once('value')
+        firebaseAction(async ({ bindFirebaseRef }) => {
+          await bindFirebaseRef('plans', plansRef)
         })
+        commit('setPlans', { plans: snapshot.val() })
+      },
+      ADD_PLAN: firebaseAction(async (ctx, { user, plan }) => {
+        const planRef = db.ref(`plans/${user.uid}`)
+        await planRef.push(plan)
       }),
-      callAuth() {
-        firebase.auth().signInWithPopup(provider)
+      async callAuth({ dispatch }, { providerName }) {
+        let res
+        if (providerName === 'facebook') {
+          fbprovider.addScope('user_birthday')
+          res = await firebase.auth().signInWithPopup(fbprovider).catch((e) => console.error(e))
+        } else {
+          res = await firebase.auth().signInWithPopup(provider).catch((e) => console.error(e))
+        }
+        await dispatch('SET_CREDENTIAL', { user: res.user })
       },
       signOut() {
         firebase.auth().signOut()

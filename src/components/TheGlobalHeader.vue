@@ -1,6 +1,6 @@
 <template>
   <div :class="$style.globalHeader">
-    <h1 :class="$style.logo"><v-logo /></h1>
+    <a href="/user"><h1 :class="$style.logo"><v-logo /></h1></a>
     <div :class="$style.buttons">
       <v-btn outline small color="white" :class="$style.button" class="mr-0" @click="logout">Logout</v-btn>
     </div>

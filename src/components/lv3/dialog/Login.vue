@@ -7,9 +7,9 @@
       <v-container grid-list-md>
         <v-layout wrap>
           <v-flex xs12>
-            <v-btn color="indigo" block dark large :class="$style.snslogin" @click="callAuth">Facebookログイン</v-btn>
+            <v-btn color="indigo" block dark large :class="$style.snslogin" @click="callAuth({ providerName: 'facebook' })">Facebookログイン</v-btn>
             <v-btn disabled color="light-blue" block dark large :class="$style.snslogin" to="/user">Twitterログイン</v-btn>
-            <v-btn color="blue" block dark large :class="$style.snslogin" @click="callAuth">Googleログイン</v-btn>
+            <v-btn color="blue" block dark large :class="$style.snslogin" @click="callAuth({ providerName: 'google' })">Googleログイン</v-btn>
           </v-flex>
           <v-divider dark :class="$style.border"></v-divider>
           <v-flex xs12>
