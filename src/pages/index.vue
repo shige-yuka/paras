@@ -42,7 +42,7 @@ export default {
     try {
       this.userData = await auth().user
       if (this.userData) {
-        this.$store.dispatch('SET_CREDENTIAL', { user: this.userData })
+        await this.$store.dispatch('SET_CREDENTIAL', { user: this.userData })
         this.$router.push('/user')
       }
       this.loading=true

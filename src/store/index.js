@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import firebase from '~/plugins/firebase'
 import { firebaseMutations, firebaseAction } from 'vuexfire'
+
 const db = firebase.database()
 const usersRef = db.ref('/users')
 const plansRef = db.ref('/plans')
@@ -51,7 +52,7 @@ const createStore = () => {
             .child(user.uid)
             .set(userDetails)
           commit('setCredential', { user: userDetails })
-          this.$router.push('/user')
+          // this.$router.push('/user')
         } catch (e) {
           if (e.code === 'auth/user-not-found') {
             console.error('User not found')
