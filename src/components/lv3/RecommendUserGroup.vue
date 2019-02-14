@@ -47,7 +47,7 @@
       planItems: [
         {
           src: require('~/assets/img/img-sample2.png'),
-          avatar: require('~/assets/img/avatar01.png'),
+          // avatar: require('~/assets/img/avatar01.png'),
           username: 'Takeshige',
           title: 'おいしい食パンを焼く',
           plan: '食パンのレシピを検索する',
@@ -59,7 +59,7 @@
         },
         {
           src: require('~/assets/img/img-sample4.png'),
-          avatar: require('~/assets/img/avatar02.png'),
+          // avatar: require('~/assets/img/avatar02.png'),
           username: 'Hanako',
           title: 'スカイダイビングをする',
           plan: 'スカイダイビングで検索',
@@ -71,7 +71,7 @@
         },
         {
           src: require('~/assets/img/img-sample3.png'),
-          avatar: require('~/assets/img/avatar03.png'),
+          // avatar: require('~/assets/img/avatar03.png'),
           username: 'Taro',
           title: 'プランターでブルーベリーを育てる',
           plan: 'ブルーベリー 育て方 で検索',

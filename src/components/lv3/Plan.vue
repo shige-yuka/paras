@@ -4,7 +4,7 @@
     <li :class="[$style.item]" v-for="(pItems, index) in plans" :key="index">
       <v-card>
         <v-card-title primary-title>
-          <img :src="pItems.avatar" :class="$style.avatar">
+          <!-- <img :src="pItems.avatar" :class="$style.avatar"> -->
           <p :class="$style.username">{{ pItems.username }}</p>
           <div :class="$style.overview">
             <h3 :class="$style.title">{{ pItems.title }}</h3>
@@ -45,7 +45,7 @@
       <li :class="[$style.item]" v-for="(mItems, index) in messages" :key="index">
         <v-card>
           <v-card-title primary-title>
-            <img :src="mItems.avatar" :class="$style.avatar">
+            <!-- <img :src="mItems.avatar" :class="$style.avatar"> -->
             <p :class="$style.username">{{ mItems.username }}</p>
             <div :class="$style.overview">
               <p>{{ mItems.message }}</p>
@@ -69,7 +69,7 @@
       message: '',
       planItems: [
         {
-          avatar: require('~/assets/img/avatar01.png'),
+          // avatar: require('~/assets/img/avatar01.png'),
           username: 'Takeshige',
           title: 'おいしい食パンを焼く',
           plan: '食パンのレシピを検索する',
@@ -99,12 +99,12 @@
       ],
       messageItems: [
         {
-        avatar: require('~/assets/img/avatar02.png'),
+        // avatar: require('~/assets/img/avatar02.png'),
         username: 'Hanako',
         message: 'パンの気泡が大きくなる場合は焼く前のガス抜きを丁寧にやると良いです！',
         },
         {
-        avatar: require('~/assets/img/avatar03.png'),
+        // avatar: require('~/assets/img/avatar03.png'),
         username: 'Taro',
         message: '元も子もないかもしれませんが、ホームベーカリーを使うと本当に美味しいパンが焼けます。',
         }
