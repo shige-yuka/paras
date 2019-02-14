@@ -3,11 +3,11 @@
     <article>
       <div id="avatarWrap" :class="$style.avatarWrap">
         <!-- <label for="avatar" :class="$style.avatarNoImage">
-          <v-icon-photo :class="$style.avatar" />	
-          <input :class="$style.uploadButton" id="avatar" type="file" @change="change">	
+          <v-icon-photo :class="$style.avatar" />
+          <input :class="$style.uploadButton" id="avatar" type="file" @change="change">
         </label>	 -->
-        <div v-if="user">	
-          <img :src="`${user.icon}`" :class="$style.avatarImage">	
+        <div v-if="user">
+          <img :src="`${user.icon}`" :class="$style.avatarImage">
         </div>
       </div>
     </article>
@@ -21,13 +21,13 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import Vue from 'vue'
 import WantTo from '~/components/lv1/WantTo.vue'
 import VIconPhoto from '~/components/icon/photo.vue'
 import { mapGetters } from 'vuex'
 
-export default Vue.extend({
+export default {
 
   components: {
     VIconPhoto
@@ -50,7 +50,7 @@ export default Vue.extend({
   computed: {
     ...mapGetters(['user'])
   }
-})
+}
 </script>
 
 

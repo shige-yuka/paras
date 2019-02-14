@@ -15,16 +15,12 @@
   </section>
 </template>
 
-<script lang="ts">
+<script>
 import Vue from 'vue'
 import SignUpDialog from '~/components/lv3/dialog/SignUp.vue'
 
-interface IData {
-  dialog: boolean
-}
-
-export default Vue.extend({
-  data(): IData {
+export default {
+  data() {
     return {
       dialog: false
     }
@@ -32,7 +28,7 @@ export default Vue.extend({
   components: {
     SignUpDialog
   }
-})
+}
 </script>
 
 <style module>

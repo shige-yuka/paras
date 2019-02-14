@@ -31,17 +31,17 @@
   </v-card>
 </template>
 
-<script lang="ts">
+<script>
 import Vue from 'vue'
 import firebase from '@/plugins/firebase'
 import { mapGetters, mapActions } from 'vuex'
 
-export default Vue.extend({
+export default {
   name: 'SignUp',
   methods: {
     ...mapActions(['callAuth'])
   }
-})
+}
 </script>
 
 <style module>

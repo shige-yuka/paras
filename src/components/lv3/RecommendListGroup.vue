@@ -63,7 +63,7 @@
   </ul>
 </template>
 
-<script lang="ts">
+<script>
   import Vue from 'vue'
   import Cheering from '~/components/lv3/dialog/Cheering.vue'
   import dayjs from 'dayjs'
@@ -72,7 +72,7 @@
 
   const db = firebase.database()
 
-  export default Vue.extend({
+  export default {
     components: {
       Cheering
     },
@@ -84,29 +84,29 @@
       console.log(this.plans)
     },
     methods: {
-      complete: async function(plan: any, i: number) {
+      complete: async function(plan, i) {
         plan.isCompleted = true
         this.isCheeringModal = true
-        const index = this.plans[i].plans.findIndex((p: any) => p.plan === plan.plan)
-        const p = this.plans[i].plans.filter((p: any) => p.title === plan.plan)
+        const index = this.plans[i].plans.findIndex((p) => p.plan === plan.plan)
+        const p = this.plans[i].plans.filter((p) => p.title === plan.plan)
         p.isCompleted = true
         // const updates: any = {}
         // updates[`/plans/${this.user.uid}/${i}/plans/${index}`] = p
         // db.ref().update(updates)
         // console.log(`/plans/${this.user.uid}/${i}/plans/${index}`)
       },
-      deletePlan: async function(i: string) {
+      deletePlan: async function(i) {
         db.ref(`/plans/${this.user.uid}`).child(i).remove()
         await this.$store.dispatch('INIT_PLANS', { user: this.user })
       },
-      getFirstPlans: function(array: any[]) {
+      getFirstPlans: function(array) {
         return array.find(plans => plans.isCompleted === false)
       },
-      formatDate: function(date: string) {
+      formatDate: function(date) {
         return dayjs(date).format('YYYY/MM/DD')
       },
-      ImgSrc: function(title: string) {
-        let img: any
+      ImgSrc: function(title) {
+        let img
         switch (title) {
           case 'おいしい食パンを焼く':
             img = require('~/assets/img/img-sample2.png')
@@ -124,7 +124,7 @@
     computed: {
       ...mapGetters(['plans', 'user']),
     },
-  })
+  }
 </script>
 
 <style module>

@@ -14,17 +14,17 @@
   </section>
 </template>
 
-<script lang="ts">
+<script>
   import Vue from 'vue'
   import GlobalHeader from '~/components/TheServiceGlobalHeader.vue'
   import GlobalFooter from '~/components/TheGlobalFooter.vue'
 
-  export default Vue.extend({
+  export default {
     components: {
       GlobalHeader,
       GlobalFooter,
     }
-  })
+  }
 </script>
 
 <style module>

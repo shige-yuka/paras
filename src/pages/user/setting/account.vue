@@ -12,11 +12,11 @@
   </article>
 </template>
 
-<script lang="ts">
+<script>
 import Vue from 'vue'
 
 import VIconPhoto from '~/components/icon/photo.vue'
-export default Vue.extend({
+export default {
   layout: 'user',
 
   components: {
@@ -27,14 +27,14 @@ export default Vue.extend({
     preview: ""
   }),
   methods: {
-    change: function(e: any){
+    change: function(e) {
       var file = e.target.files[0];
       if(file && file.type.match(/^image\/(png|jpeg|jpg)$/)){
         this.preview = URL.createObjectURL(file);
       }
     }
   }
-})
+}
 </script>
 
 <style module>

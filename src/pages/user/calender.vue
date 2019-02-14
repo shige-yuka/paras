@@ -50,19 +50,19 @@
         </li>
       </ul>
     </section>
-    
+
     <v-fab />
   </article>
 </template>
 
-<script lang="ts">
+<script>
 import Vue from 'vue'
 import 'vuetify/dist/vuetify.min.css'
 import VButton from '~/components/ui/VButton.vue'
 import VFab from '~/components/ui/VFloatingActionButton.vue'
 import Headline from '~/components/lv1/Headline.vue'
 
-export default Vue.extend({
+export default {
   layout: 'user',
 
   components: {
@@ -77,7 +77,7 @@ export default Vue.extend({
       reactive: false
     }
   }
-})
+}
 </script>
 
 <style module>
