@@ -18,13 +18,13 @@
   </section>
 </template>
 
-<script lang="ts">
+<script>
 import Vue from 'vue'
 import VLogo from '~/components/logo/logo.vue'
 import LoginDialog from '~/components/lv3/dialog/Login.vue'
 import SignUpDialog from '~/components/lv3/dialog/SignUp.vue'
 
-export default Vue.extend({
+export default {
   data() {
     return {
       dialog: false,
@@ -36,7 +36,7 @@ export default Vue.extend({
     SignUpDialog,
     LoginDialog
   }
-})
+}
 </script>
 
 <style module>

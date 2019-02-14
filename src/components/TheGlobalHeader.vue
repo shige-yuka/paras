@@ -7,13 +7,13 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import Vue from 'vue'
 import VLogo from '~/components/logo/logo.vue'
 import firebase from '@/plugins/firebase'
 import auth from '@/plugins/auth'
 
-export default Vue.extend({
+export default {
   data: () => ({
     userData: null
   }),
@@ -26,7 +26,7 @@ export default Vue.extend({
       location.href = './';
     }
   }
-})
+}
 </script>
 
 <style module>

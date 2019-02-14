@@ -126,40 +126,12 @@
   </v-card>
 </template>
 
-<script lang="ts">
+<script>
 import Vue from 'vue'
 import dayjs from 'dayjs'
 
-export interface IOverview {
-  title: string;
-  categoryLv1: string;
-  categoryLv2: string;
-  budget: string;
-  goingRate: string;
-  isShow: boolean
-  plans: {
-      startDay: any;
-      day: string;
-      plan: string;
-      isCompleted?: boolean;
-  }[]
-}
-
-export interface IData {
-  valid: boolean
-  step: number
-  overview: IOverview | null
-  overviews: IOverview[] | null
-  goingRate: string
-  budget: string
-  items: string[]
-  selected: string
-  timing: string[]
-  timingSelected: string
-}
-
-export default Vue.extend({
-  data(): IData {
+export default {
+  data() {
     return {
       valid: false,
       step: 0,
@@ -256,7 +228,7 @@ export default Vue.extend({
       return
     }
     this.overview = this.getOverView()
-    this.goingRate = this.overview!.goingRate
+    this.goingRate = this.overview.goingRate
   },
   methods: {
     getOverView: function() {
@@ -266,7 +238,7 @@ export default Vue.extend({
       return this.overviews.sort(() => Math.random() - 0.5).shift() || null
     },
     // 開始日から起算した日をStrign型で整形する
-    formatDate: function(day: number) {
+    formatDate: function(day) {
       return dayjs().add(day, 'day').format('MM/DD')
     },
     addPlan: async function() {
@@ -286,7 +258,7 @@ export default Vue.extend({
       return
     }
   }
-})
+}
 </script>
 
 <style module>

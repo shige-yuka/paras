@@ -12,7 +12,7 @@ import VButton from '~/components/ui/VButton.vue'
 import VFab from '~/components/ui/VFloatingActionButton.vue'
 import RecommendList from '~/components/lv3/RecommendList.vue'
 
-export default Vue.extend({
+export default {
   layout: 'user',
 
   components: {
@@ -20,5 +20,5 @@ export default Vue.extend({
     VFab,
     RecommendList
   }
-})
+}
 </script>

@@ -29,7 +29,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import Vue from 'vue'
 import VIconHome from '~/components/icon/home.vue'
 import VIconCalender from '~/components/icon/calender.vue'
@@ -37,7 +37,7 @@ import VIconMessage from '~/components/icon/message.vue'
 import VIconConfig from '~/components/icon/config.vue'
 import VLogo from '~/components/logo/logo.vue'
 
-export default Vue.extend({
+export default {
   components: {
     VIconHome,
     VIconCalender,
@@ -45,7 +45,7 @@ export default Vue.extend({
     VIconConfig,
     VLogo
   }
-})
+}
 </script>
 
 <style module>

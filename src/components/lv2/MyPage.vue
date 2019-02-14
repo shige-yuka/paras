@@ -5,10 +5,10 @@
 </div>
 </template>
 
-<script lang="ts">
+<script>
 import Vue from 'vue'
 import firebase from '@/plugins/firebase'
-export default Vue.extend({
+export default {
   name: 'mypage',
   props: ['user'],
   methods: {
@@ -16,5 +16,5 @@ export default Vue.extend({
       firebase.auth().signOut()
     }
   }
-})
+}
 </script>

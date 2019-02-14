@@ -5,13 +5,12 @@
   </article>
 </template>
 
-<script lang="ts">
+<script>
 import Vue from 'vue'
 import 'vuetify/dist/vuetify.min.css'
-export default Vue.extend({
+export default {
   layout: 'user',
-
-})
+}
 </script>
 
 <style module>

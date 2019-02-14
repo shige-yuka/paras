@@ -15,19 +15,19 @@
   </section>
 </template>
 
-<script lang="ts">
+<script>
   import Vue from 'vue'
   import GlobalHeader from '~/components/TheGlobalHeader.vue'
   import GlobalFooter from '~/components/TheGlobalFooter.vue'
   import GlobalNav from '~/components/TheGlobalNav.vue'
 
-  export default Vue.extend({
+  export default {
     components: {
       GlobalHeader,
       GlobalFooter,
       GlobalNav
     }
-  })
+  }
 </script>
 
 <style module>

@@ -14,10 +14,10 @@
   </v-card>
 </template>
 
-<script lang="ts">
+<script>
 import Vue from 'vue'
 
-export default Vue.extend({
+export default {
   name: 'Cheering',
   data: () => ({
     emoji: ['🎉','🏌️‍♀️','🌸','🐥','🐱','🐺','☺','🍣','🏋️‍♀️','🏊‍♀️','👏','👧','👯‍♀️','👱‍♂️','💃','💪🏻','💯','🕺','😉','😊','🙆‍♀️','🤸🏼'],
@@ -28,7 +28,7 @@ export default Vue.extend({
       return this.emoji[rnd];
     }
   }
-})
+}
 </script>
 
 <style module>

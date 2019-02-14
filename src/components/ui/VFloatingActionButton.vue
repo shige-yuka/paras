@@ -13,11 +13,11 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
   import Vue from 'vue'
   import AddTodoDialog from '~/components/lv3/dialog/AddTodo.vue'
 
-  export default Vue.extend({
+  export default {
     data() {
       return {
         dialog: false
@@ -26,7 +26,7 @@
     components: {
       AddTodoDialog
     }
-  })
+  }
 </script>
 
 <style module>

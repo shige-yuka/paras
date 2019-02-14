@@ -11,11 +11,11 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import Vue from 'vue'
 import VIconPhoto from '~/components/icon/photo.vue'
 
-export default Vue.extend({
+export default {
   components: {
     VIconPhoto
   },
@@ -24,7 +24,7 @@ export default Vue.extend({
       return false
     }
   }
-})
+}
 </script>
 
 
